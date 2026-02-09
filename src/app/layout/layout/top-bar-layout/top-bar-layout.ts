@@ -8,5 +8,5 @@ import { RouterModule, RouterOutlet } from "@angular/router";
   styleUrl: './top-bar-layout.scss',
 })
 export class TopBarLayout {
-  @Input() title!: string;
+  @Input() pageTitle!: string;
 }
