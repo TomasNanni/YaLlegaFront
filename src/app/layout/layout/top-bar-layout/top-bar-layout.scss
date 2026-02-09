@@ -1,0 +1,38 @@
+#Logo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.Header {
+	font-family: var(--logoFont);
+	background-color: var(--topBarColor);
+	display: flex;
+	padding-inline: clamp(0.6rem, 4vw, 1.5rem);
+	padding-block: 0.4rem;
+	justify-content: center;
+	width: 100%;
+	align-items: center;
+	gap: 0.7rem;
+	min-width: 0;
+
+	h1{
+		color: var(--logoColor);
+		font-size: clamp(2.1rem, 5.2vw, 2.3rem);
+		white-space: nowrap;
+	}
+	h2{
+		font-size: clamp(1.6rem, 5.5vw, 2rem);
+	}
+
+	svg {
+		color: var(--logoColor);
+		height: clamp(1.4rem, 5vw, 2.2rem);
+	}
+}
+
+#secondaryHeader {
+	background-color: var(--secondaryColor);
+	font-family: var(--textFont);
+}
