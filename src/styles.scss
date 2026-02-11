@@ -177,8 +177,15 @@ h2 {
 p {
 	font-size: 1rem;
 }
-app-top-bar-layout{}
-
+.mainPageWithHeader{
+	display: flex;
+	justify-content: center;
+	padding-top: 1rem;
+}
+.form{
+	border: 0.3em var(--secondaryColor) solid;
+	border-radius: 0.5em;
+}
 :root {
 	--topBarColor: #000FAF;
 	--secondaryColor: #EAEAEA;

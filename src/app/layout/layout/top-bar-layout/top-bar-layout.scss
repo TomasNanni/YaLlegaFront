@@ -17,19 +17,24 @@
 	gap: 0.7rem;
 	min-width: 0;
 
-	h1{
+	h1 {
 		color: var(--logoColor);
 		font-size: clamp(2.1rem, 5.2vw, 2.3rem);
 		white-space: nowrap;
 	}
-	h2{
+
+	h2 {
 		font-size: clamp(1.6rem, 5.5vw, 2rem);
 	}
+}
 
-	svg {
-		color: var(--logoColor);
-		height: clamp(1.4rem, 5vw, 2.2rem);
-	}
+svg {
+	color: var(--logoColor);
+	height: clamp(1.4rem, 5vw, 2.2rem);
+}
+
+#secondarySVG{
+	fill: var(--textColor);
 }
 
 #secondaryHeader {

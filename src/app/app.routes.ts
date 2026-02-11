@@ -15,23 +15,23 @@ export const routes: Routes = [
         component: LandingPage,
     },
     {
-        path: "Login",
+        path: "login",
         component: LoginPage
     },
     {
-        path: "Register",
+        path: "register",
         component: RegisterPage
     },
     {
-        path: "RestaurantList",
+        path: "restaurantList",
         component: RestaurantListPage
     },
     {
-        path: "Restaurant/:idRestaurant",
+        path: "restaurant/:idRestaurant",
         component: RestaurantPage
     },
     {
-        path: "ProductDetails/:idProduct",
+        path: "productDetails/:idProduct",
         component: ProductDetails
     },
 ];

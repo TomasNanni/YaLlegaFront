@@ -3,7 +3,7 @@ import { RouterModule, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-top-bar-layout',
-  imports: [RouterOutlet, RouterModule],
+  imports: [RouterModule],
   templateUrl: './top-bar-layout.html',
   styleUrl: './top-bar-layout.scss',
 })
