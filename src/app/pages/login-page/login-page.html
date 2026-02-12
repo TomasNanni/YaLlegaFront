@@ -1,37 +1,43 @@
 <app-top-bar-layout pageTitle="Inicio de Sesión"></app-top-bar-layout>
 <div class="mainPageWithHeader">
     <form #loginForm="ngForm" class="form" (ngSubmit)="login(loginForm)">
-        <div>
+        <div class="inputContainerForm">
             <label for="Email">Correo Electronico</label>
-            <input class="inputPrimario" name="email" type="email" id="email" ngModel #email="ngModel" required email
+            <input class="mainInput" name="EmailAddress" type="email" id="email" ngModel #email="ngModel" required email
                 autocomplete="email" placeholder="ejemplo@gmail.com">
+        </div>
+        <div class="errorContainer">
             @if (email.invalid && !email.pristine) {
             @if (email.errors?.['required']) {
-            <p>Debe colocar un correo electrónico.</p>
+            <p class="error">Debe colocar un correo electrónico.</p>
             }
             @if (email.errors?.['email']) {
-            <p>Email inválido</p>
+            <p class="error">Email inválido</p>
             }
             }
         </div>
-        <div>
+        <div class="inputContainerForm">
             <label for="password">Contraseña</label>
-            <input class="inputPrimario" id="password" name="password" type="password" ngModel #password="ngModel"
+            <input class="mainInput" id="password" name="Password" type="password" ngModel #password="ngModel"
                 required="true" minlength="4" autocomplete="current-password" placeholder="*************">
+        </div>
+        <div class="errorContainer">
             @if (password.invalid && !password.pristine) {
-            <p>Debe colocar una contraseña de al menos 4 caracteres.</p>
+            <p class="error">Debe colocar una contraseña de al menos 4 caracteres.</p>
             }
         </div>
-        <div>
-            <button [disabled]="loginForm.invalid || solicitudABackEnCurso">Iniciar Sesión</button>
+        <div class="inputContainerForm">
+            <button class="mainInput" [disabled]="loginForm.invalid || solicitudABackEnCurso">Iniciar Sesión</button>
+        </div>
+        <div class="errorContainer">
             @if (errorLogin) {
-            <p>Datos de sesión incorrectos, intente nuevamente.</p>
+            <p class="error">Datos de sesión incorrectos, intente nuevamente</p>
             }
             @if (solicitudABackEnCurso) {
             <!-- <app-spinner/> -->
             }
         </div>
-        <div class="contenedorInput">
+        <div class="inputContainerForm">
             <p>No tenés cuenta? <a routerLink="/register">Registrate</a></p>
         </div>
     </form>

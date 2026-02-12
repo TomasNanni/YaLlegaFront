@@ -27,6 +27,7 @@ export class AuthService {
         body: JSON.stringify(loginData),
       }
     )
+    console.log(res)
     if (res.ok) {
       const resText = await res.text()
       this.token = resText;

@@ -182,13 +182,45 @@ p {
 	justify-content: center;
 	padding-top: 1rem;
 }
-.form{
-	border: 0.3em var(--secondaryColor) solid;
-	border-radius: 0.5em;
+.mainInput{
+	text-align: center;
+	height: 1.5rem;
+	align-self: center;
+	font-size: 0.8rem;
+	border-radius: 0.6rem;
 }
+
+.inputContainerForm{
+	display: flex;
+	flex-direction: column;
+	padding: 0.5rem;
+	gap: 0.3rem;
+	text-align: center;
+}
+.form{
+	border: 0.3rem var(--secondaryColor) solid;
+	border-radius: 0.5rem;
+	padding: clamp(1rem, 3vw, 2rem);
+	margin-top: 5%;
+}
+.errorContainer{
+	min-height: clamp(1.5rem, 2vw, 2rem);
+	min-width: clamp(15rem, 50vw, 26.192rem);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+
+}
+.error{
+	text-align: center;
+	color: var(--errorColor);
+}
+
 :root {
 	--topBarColor: #000FAF;
 	--secondaryColor: #EAEAEA;
+	--errorColor: rgb(128, 128, 128);
 	--textColor: #000000;
 	--logoFont: "Faster One", system-ui;
 	--logoColor: #ffffff;
