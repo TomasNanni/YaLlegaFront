@@ -3,12 +3,11 @@ import { AuthService } from "../../services/auth-service";
 import { Router, RouterModule } from "@angular/router";
 import { FormsModule, NgForm } from "@angular/forms";
 import { TopBarLayout } from "../../layout/layout/top-bar-layout/top-bar-layout";
-import { NgClass, NgStyle } from "@angular/common";
 
 
 @Component({
   selector: 'app-login-page',
-  imports: [FormsModule, RouterModule, TopBarLayout, NgClass, NgStyle],
+  imports: [FormsModule, RouterModule, TopBarLayout],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })
@@ -26,7 +25,6 @@ export class LoginPage {
       return
     }
     this.solicitudABackEnCurso = true;
-    console.log(form.value);
     const loginResult = await this.authService.login(form.value);
     this.solicitudABackEnCurso = false;
 
