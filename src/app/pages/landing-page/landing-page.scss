@@ -1,0 +1,39 @@
+.mainPageWithHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+}
+
+a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+p {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--secondaryColor);
+}
+
+svg {
+    height: clamp(9rem, 25vw, 17rem);
+}
+
+@media (min-width: 768px) {
+    a {
+        padding: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .mainPageWithHeader {
+        flex-direction: row;
+        justify-content: space-around;
+        padding-top: 8%;
+    }
+
+}

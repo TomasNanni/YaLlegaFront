@@ -181,6 +181,7 @@ p {
 	display: flex;
 	justify-content: center;
 	padding-top: 1rem;
+	padding-bottom: 1rem;
 }
 .mainInput{
 	text-align: center;
@@ -215,6 +216,7 @@ p {
 .error{
 	text-align: center;
 	color: var(--errorColor);
+	padding: 0 0.4rem;
 }
 
 :root {
