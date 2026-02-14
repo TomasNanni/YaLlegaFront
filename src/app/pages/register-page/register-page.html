@@ -1,183 +1,188 @@
 <app-top-bar-layout pageTitle="Registrarse"></app-top-bar-layout>
 <div class="mainPageWithHeader">
-    <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <form #registerForm="ngForm" class="form" id="form" (ngSubmit)="register(registerForm)">
         <!-- Formulario datos usuario -->
-        <div class="inputContainerForm">
-            <label for="firstName">Nombre</label>
-            <input class="mainInput" name="firstName" id="firstName" ngModel #firstName="ngModel" required
-                autocomplete="firstName">
-        </div>
-        <div class="errorContainer">
-            @if (firstName.invalid && !firstName.pristine) {
-            <p class="error">Debe colocar un Nombre</p>
-            }
-        </div>
-        <div class="inputContainerForm">
-            <label for="lastName">Apellido</label>
-            <input class="mainInput" name="lastName" id="lastName" ngModel #lastName="ngModel" required
-                autocomplete="family-name">
-        </div>
-        <div class="errorContainer">
-            @if (lastName.invalid && !lastName.pristine) {
-            <p class="error">Debe colocar un apellido</p>
-            }
-        </div>
-        <div class="inputContainerForm">
-            <label for="emailAddress">Correo Electrónico</label>
-            <input class="mainInput" name="emailAddress" type="email" id="emailAddress" ngModel #emailAddress="ngModel"
-                required email autocomplete="email" placeholder="ejemplo@gmail.com">
-        </div>
-        <div class="errorContainer">
-            @if (emailAddress.invalid && !emailAddress.pristine) {
-            @if (emailAddress.errors?.['required']) {
-            <p class="error">Debe colocar un correo electrónico</p>
-            }
-            @if (emailAddress.errors?.['email']) {
-            <p class="error">Email inválido</p>
-            }
-            }
-        </div>
-        <div class="inputContainerForm">
-            <label for="password">Contraseña</label>
-            <input class="mainInput" name="password" type="password" id="password" ngModel #password="ngModel" required
-                minlength="4" autocomplete="new-password" placeholder="*************">
-        </div>
-        <div class="errorContainer">
-            @if (password.invalid && !password.pristine) {
-            <p class="error">Debe colocar una contraseña de al menos 4 caracteres</p>
-            }
-        </div>
-        <div class="inputContainerForm">
-            <label for="secondPassword">Confirmar Contraseña</label>
-            <input class="mainInput" name="secondPassword" type="password" id="secondPassword" ngModel
-                #secondPassword="ngModel" required minlength="4" autocomplete="new-password"
-                placeholder="*************">
-        </div>
-        <div class="errorContainer">
-            @if (secondPassword.invalid && !secondPassword.pristine) {
-            <p class="error">Debe colocar una contraseña de al menos 4 caracteres</p>
-            }
-            @if ((password.value !== secondPassword.value) && !password.pristine && !secondPassword.pristine) {
-            <p class="error">Las contraseñas deben ser iguales</p>
-            }
-        </div>
-        <!-- Datos restaurante -->
-        <div class="inputContainerForm">
-            <label for="restaurantName">Nombre del Restaurante</label>
-            <input class="mainInput" name="restaurantName" id="restaurantName" ngModel #restaurantName="ngModel"
-                required>
-        </div>
-        <div class="errorContainer">
-            @if (restaurantName.invalid && !restaurantName.pristine) {
-            <p class="error">Debe colocar el nombre del restaurante</p>
-            }
-        </div>
-        <div class="inputContainerForm">
-            <label for="urlLogoImage">URL Logo</label>
-            <input class="mainInput" name="urlLogoImage" type="url" id="urlLogoImage" ngModel required
-                #urlLogoImage="ngModel">
-        </div>
-        <div class="errorContainer">
-            @if (urlLogoImage.errors?.['url'] && !urlLogoImage.pristine) {
-            <p class="error">URL inválida</p>
-            }
-            @if (urlLogoImage.errors?.['required'] && !urlLogoImage.pristine) {
-            <p class="error">URL necesaria</p>
-            }
-        </div>
-        <div class="inputContainerForm">
-            <label for="urlBannerImage">URL Banner</label>
-            <input class="mainInput" name="urlBannerImage" type="url" id="urlBannerImage" ngModel
-                #urlBannerImage="ngModel">
-        </div>
-        <div class="errorContainer">
-            @if (urlBannerImage.errors?.['url'] && !urlBannerImage.pristine) {
-            <p class="error">URL inválida</p>
-            }
-        </div>
-        <div class="inputContainerForm">
-            <p>Dias de Apertura</p>
-            <div>
-                <div>
-                    <label for="monday">Lunes</label>
-                    <input class="mainInput" type="checkbox" name="monday" id="monday" value="monday" ngModel
-                        #monday="ngModel">
-                </div>
-                <div>
-                    <label for="tuesday">Martes</label>
-                    <input class="mainInput" type="checkbox" name="tuesday" id="tuesday" value="tuesday" ngModel
-                        #tuesday="ngModel">
-                </div>
-                <div>
-                    <label for="wednesday">Miércoles</label>
-                    <input class="mainInput" type="checkbox" name="wednesday" id="wednesday" value="wednesday" ngModel
-                        #wednesday="ngModel">
-                </div>
-                <div>
-                    <label for="thursday">Jueves</label>
-                    <input class="mainInput" type="checkbox" name="thursday" id="thursday" value="thursday" ngModel
-                        #thursday="ngModel">
-                </div>
-                <div>
-                    <label for="friday">Viernes</label>
-                    <input class="mainInput" type="checkbox" name="friday" id="friday" value="friday" ngModel
-                        #friday="ngModel">
-                </div>
-                <div>
-                    <label for="saturday">Sábado</label>
-                    <input class="mainInput" type="checkbox" name="saturday" id="saturday" value="saturday" ngModel
-                        #saturday="ngModel">
-                </div>
-                <div>
-                    <label for="sunday">Domingo</label>
-                    <input class="mainInput" type="checkbox" name="sunday" id="sunday" value="sunday" ngModel
-                        #sunday="ngModel">
-                </div>
+        <div>
+            <div class="inputContainerForm">
+                <label for="firstName">Nombre</label>
+                <input class="mainInput" name="firstName" id="firstName" ngModel #firstName="ngModel" required
+                    autocomplete="firstName">
+            </div>
+            <div class="errorContainer">
+                @if (firstName.invalid && !firstName.pristine) {
+                <p class="error">Debe colocar un Nombre</p>
+                }
+            </div>
+            <div class="inputContainerForm">
+                <label for="lastName">Apellido</label>
+                <input class="mainInput" name="lastName" id="lastName" ngModel #lastName="ngModel" required
+                    autocomplete="family-name">
+            </div>
+            <div class="errorContainer">
+                @if (lastName.invalid && !lastName.pristine) {
+                <p class="error">Debe colocar un apellido</p>
+                }
+            </div>
+            <div class="inputContainerForm">
+                <label for="emailAddress">Correo Electrónico</label>
+                <input class="mainInput" name="emailAddress" type="email" id="emailAddress" ngModel
+                    #emailAddress="ngModel" required email autocomplete="email" placeholder="ejemplo@gmail.com">
+            </div>
+            <div class="errorContainer">
+                @if (emailAddress.invalid && !emailAddress.pristine) {
+                @if (emailAddress.errors?.['required']) {
+                <p class="error">Debe colocar un correo electrónico</p>
+                }
+                @if (emailAddress.errors?.['email']) {
+                <p class="error">Email inválido</p>
+                }
+                }
+            </div>
+            <div class="inputContainerForm">
+                <label for="password">Contraseña</label>
+                <input class="mainInput" name="password" type="password" id="password" ngModel #password="ngModel"
+                    required minlength="4" autocomplete="new-password" placeholder="*************">
+            </div>
+            <div class="errorContainer">
+                @if (password.invalid && !password.pristine) {
+                <p class="error">Debe colocar una contraseña de al menos 4 caracteres</p>
+                }
+            </div>
+            <div class="inputContainerForm">
+                <label for="secondPassword">Confirmar Contraseña</label>
+                <input class="mainInput" name="secondPassword" type="password" id="secondPassword" ngModel
+                    #secondPassword="ngModel" required minlength="4" autocomplete="new-password"
+                    placeholder="*************">
+            </div>
+            <div class="errorContainer">
+                @if (secondPassword.invalid && !secondPassword.pristine) {
+                <p class="error">Debe colocar una contraseña de al menos 4 caracteres</p>
+                }
+                @if ((password.value !== secondPassword.value) && !password.pristine && !secondPassword.pristine) {
+                <p class="error">Las contraseñas deben ser iguales</p>
+                }
+            </div>
+            <!-- Datos restaurante -->
+            <div class="inputContainerForm">
+                <label for="restaurantName">Nombre del Restaurante</label>
+                <input class="mainInput" name="restaurantName" id="restaurantName" ngModel #restaurantName="ngModel"
+                    required>
+            </div>
+            <div class="errorContainer">
+                @if (restaurantName.invalid && !restaurantName.pristine) {
+                <p class="error">Debe colocar el nombre del restaurante</p>
+                }
+            </div>
+            <div class="inputContainerForm">
+                <label for="urlLogoImage">URL Logo</label>
+                <input class="mainInput" name="urlLogoImage" type="url" id="urlLogoImage" ngModel required
+                    #urlLogoImage="ngModel">
+            </div>
+            <div class="errorContainer">
+                @if (urlLogoImage.errors?.['url'] && !urlLogoImage.pristine) {
+                <p class="error">URL inválida</p>
+                }
+                @if (urlLogoImage.errors?.['required'] && !urlLogoImage.pristine) {
+                <p class="error">URL necesaria</p>
+                }
+            </div>
+            <div class="inputContainerForm">
+                <label for="urlBannerImage">URL Banner</label>
+                <input class="mainInput" name="urlBannerImage" type="url" id="urlBannerImage" ngModel
+                    #urlBannerImage="ngModel">
+            </div>
+            <div class="errorContainer">
+                @if (urlBannerImage.errors?.['url'] && !urlBannerImage.pristine) {
+                <p class="error">URL inválida</p>
+                }
             </div>
         </div>
-        <div class="inputContainerForm">
-            <label for="openingTime">Horario de Apertura</label>
-            <input class="mainInput" name="openingTime" type="time" id="openingTime" ngModel #openingTime="ngModel"
-                required>
-        </div>
-        <div class="errorContainer">
-            @if (openingTime.invalid && !openingTime.pristine) {
-            <p class="error">Debe indicar el horario de apertura</p>
-            }
-        </div>
-        <div class="inputContainerForm">
-            <label for="closingTime">Horario de Cierre</label>
-            <input class="mainInput" name="closingTime" type="time" id="closingTime" ngModel #closingTime="ngModel"
-                required>
-        </div>
-        <div class="errorContainer">
-            @if (closingTime.invalid && !closingTime.pristine) {
-            <p class="error">Debe indicar el horario de cierre.</p>
-            }
-        </div>
-        <div class="inputContainerForm">
-            <label for="contact">Contacto</label>
-            <input class="mainInput" name="contact" type="tel" id="contact" ngModel #contact="ngModel" required
-                placeholder="+54 341 123 4567">
-        </div>
-        <div class="errorContainer">
-            @if (contact.invalid && !contact.pristine) {
-            <p class="error">Debe colocar un número de contacto.</p>
-            }
-        </div>
-        <div class="inputContainerForm">
-            <button class="mainInput" [disabled]="registerForm.invalid || solicitudABackEnCurso">Registrarse</button>
-        </div>
-        <div class="errorContainer">
-            @if (errorRegister) {
-            <p class="error">Ocurrio un error, intente nuevamente</p>
-            }
-            @if (solicitudABackEnCurso) {
-            <!-- <app-spinner/> -->
-            }
-        </div>
-        <div class="inputContainerForm">
-            <p>Ya tenés cuenta? <a routerLink="/login"> Inicia sesion</a></p>
+        <div>
+            <div class="inputContainerForm">
+                <p>Dias de Apertura</p>
+                <div id="checksContainer">
+                    <div>
+                        <label for="monday">Lunes</label>
+                        <input type="checkbox" name="monday" id="monday" value="monday" ngModel
+                            #monday="ngModel">
+                    </div>
+                    <div>
+                        <label for="tuesday">Martes</label>
+                        <input type="checkbox" name="tuesday" id="tuesday" value="tuesday" ngModel
+                            #tuesday="ngModel">
+                    </div>
+                    <div>
+                        <label for="wednesday">Miércoles</label>
+                        <input type="checkbox" name="wednesday" id="wednesday" value="wednesday"
+                            ngModel #wednesday="ngModel">
+                    </div>
+                    <div>
+                        <label for="thursday">Jueves</label>
+                        <input type="checkbox" name="thursday" id="thursday" value="thursday" ngModel
+                            #thursday="ngModel">
+                    </div>
+                    <div>
+                        <label for="friday">Viernes</label>
+                        <input type="checkbox" name="friday" id="friday" value="friday" ngModel
+                            #friday="ngModel">
+                    </div>
+                    <div>
+                        <label for="saturday">Sábado</label>
+                        <input type="checkbox" name="saturday" id="saturday" value="saturday" ngModel
+                            #saturday="ngModel">
+                    </div>
+                    <div>
+                        <label for="sunday">Domingo</label>
+                        <input type="checkbox" name="sunday" id="sunday" value="sunday" ngModel
+                            #sunday="ngModel">
+                    </div>
+                </div>
+            </div>
+            <div class="inputContainerForm">
+                <label for="openingTime">Horario de Apertura</label>
+                <input class="mainInput" name="openingTime" type="time" id="openingTime" ngModel #openingTime="ngModel"
+                    required>
+            </div>
+            <div class="errorContainer">
+                @if (openingTime.invalid && !openingTime.pristine) {
+                <p class="error">Debe indicar el horario de apertura</p>
+                }
+            </div>
+            <div class="inputContainerForm">
+                <label for="closingTime">Horario de Cierre</label>
+                <input class="mainInput" name="closingTime" type="time" id="closingTime" ngModel #closingTime="ngModel"
+                    required>
+            </div>
+            <div class="errorContainer">
+                @if (closingTime.invalid && !closingTime.pristine) {
+                <p class="error">Debe indicar el horario de cierre.</p>
+                }
+            </div>
+            <div class="inputContainerForm">
+                <label for="contact">Contacto</label>
+                <input class="mainInput" name="contact" type="tel" id="contact" ngModel #contact="ngModel" required
+                    placeholder="+54 341 123 4567">
+            </div>
+            <div class="errorContainer">
+                @if (contact.invalid && !contact.pristine) {
+                <p class="error">Debe colocar un número de contacto.</p>
+                }
+            </div>
+            <div class="inputContainerForm">
+                <button class="mainInput"
+                    [disabled]="registerForm.invalid || solicitudABackEnCurso">Registrarse</button>
+            </div>
+            <div class="errorContainer">
+                @if (errorRegister) {
+                <p class="error">Ocurrio un error, intente nuevamente</p>
+                }
+                @if (solicitudABackEnCurso) {
+                <!-- <app-spinner/> -->
+                }
+            </div>
+            <div class="inputContainerForm">
+                <p>Ya tenés cuenta? <a routerLink="/login"> Inicia sesion</a></p>
+            </div>
         </div>
     </form>
 </div>

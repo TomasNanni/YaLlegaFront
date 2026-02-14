@@ -186,22 +186,23 @@ p {
 	text-align: center;
 	height: 1.5rem;
 	align-self: center;
-	font-size: 0.8rem;
+	font-size: 0.9rem;
 	border-radius: 0.6rem;
 }
 
 .inputContainerForm{
 	display: flex;
 	flex-direction: column;
-	padding: 0.5rem;
+	padding: 0.5rem 0;
 	gap: 0.3rem;
 	text-align: center;
 }
 .form{
 	border: 0.3rem var(--secondaryColor) solid;
 	border-radius: 0.5rem;
-	padding: clamp(1rem, 3vw, 2rem);
+	padding: clamp(0rem, 3vw, 2rem) 0;
 	margin-top: 5%;
+	margin-bottom: 2%;
 }
 .errorContainer{
 	min-height: clamp(1.5rem, 2vw, 2rem);
@@ -210,7 +211,6 @@ p {
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-
 }
 .error{
 	text-align: center;
