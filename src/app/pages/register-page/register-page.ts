@@ -3,12 +3,12 @@ import { Category } from "../../components/category/category";
 import { TopBarLayout } from "../../layout/layout/top-bar-layout/top-bar-layout";
 import { Router, RouterLink } from '@angular/router';
 import { RestaurantService } from '../../services/restaurant-service';
-import { UserRegistrationRequest } from '../../interfaces/restaurant';
 import { FormsModule, NgForm } from '@angular/forms';
+import { UserRegistrationRequest } from '../../interfaces/auth';
 
 @Component({
   selector: 'app-register-page',
-  imports: [Category, TopBarLayout, FormsModule, RouterLink],
+  imports: [TopBarLayout, FormsModule, RouterLink],
   templateUrl: './register-page.html',
   styleUrl: './register-page.scss',
 })

@@ -1,1 +1,11 @@
-<p>restaurant-list-page works!</p>
+<app-top-bar-layout pageTitle="Lista de Restaurantes"></app-top-bar-layout>
+<div class="mainPageWithHeader">
+    @for (restaurant of restaurantsService.restaurants; track $index) {
+    <div>
+        <a [routerLink]="['/restaurant/',restaurant.id]">
+            <img [src]="restaurant.urlLogoImage" alt="Logo del restaurante">
+            <p>{{restaurant.name}}</p>
+        </a>
+    </div>
+    }
+</div>

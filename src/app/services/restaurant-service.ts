@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthService } from './auth-service';
-import { NewRestaurant, NewUser, UserRegistrationRequest } from '../interfaces/restaurant';
+import { Restaurant } from '../interfaces/restaurant';
+import { UserRegistrationRequest } from '../interfaces/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,9 @@ import { NewRestaurant, NewUser, UserRegistrationRequest } from '../interfaces/r
 export class RestaurantService {
   authService = inject(AuthService)
 
-  async register(registrationRequest : UserRegistrationRequest) {
+  restaurants : Restaurant [] = [];
+
+  async register(registrationRequest: UserRegistrationRequest) {
     const res = await fetch('https://localhost:7287/api/users/Create', {
       method: 'POST',
       headers: {
@@ -18,5 +21,15 @@ export class RestaurantService {
       body: JSON.stringify(registrationRequest),
     });
     return res.ok;
+  }
+  async getRestaurants() {
+    const res = await fetch('https://localhost:7287/api/restaurants/GetAll', {
+      method: 'GET',
+    });
+    if (res.ok){
+      const resJson : Restaurant[] = await res.json();
+      resJson.sort((restaurant1, restaurant2) => restaurant1.name.localeCompare(restaurant2.name))
+      this.restaurants = resJson;
+    }
   }
 }
