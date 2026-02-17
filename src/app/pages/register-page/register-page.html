@@ -79,7 +79,7 @@
                     #urlLogoImage="ngModel">
             </div>
             <div class="errorContainer">
-                @if (!checkURL(urlLogoImage.value) && !urlLogoImage.pristine) {
+                @if (!checkURL(urlLogoImage.value) && !urlLogoImage.pristine && !urlLogoImage.invalid) {
                 <p class="error">URL inválida</p>
                 }
                 @if (urlLogoImage.errors?.['required'] && !urlLogoImage.pristine) {

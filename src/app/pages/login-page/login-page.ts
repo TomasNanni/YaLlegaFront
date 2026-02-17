@@ -23,6 +23,7 @@ export class LoginPage {
     this.errorLogin = false;
     if (!form.value.EmailAddress || !form.value.Password) {
       this.errorLogin = true;
+      this.cdr.detectChanges();
       return
     }
     this.solicitudABackEnCurso = true;

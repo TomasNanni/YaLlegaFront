@@ -23,7 +23,7 @@
         </div>
         <div class="errorContainer">
             @if (password.invalid && !password.pristine) {
-            <p class="error">Debe colocar una contraseña de al menos 4 caracteres.</p>
+            <p class="error">Coloca una contraseña de al menos 4 caracteres.</p>
             }
         </div>
         <div class="inputContainerForm">
@@ -38,7 +38,7 @@
             }
         </div>
         <div class="inputContainerForm">
-            <p>No tenés cuenta? <a routerLink="/register">Registrate</a></p>
+            <p>No tenés cuenta? <a routerLink="/register" id="link">Registrate</a></p>
         </div>
     </form>
 </div>

@@ -22,3 +22,10 @@ button{
         flex-wrap: nowrap;
     }
 }
+
+a {
+    text-decoration: underline;
+}
+button:hover {
+    filter: brightness(90%)
+}

@@ -11,5 +11,8 @@
             </a>
         </span>
         }
+        @if (!restaurantsService.restaurants) {
+            <a routerLink="/register">No hay restaurantes creados, sube el tuyo.</a>
+        }
     </div>
 </div>
