@@ -1,0 +1,17 @@
+#mainContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.restaurantContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+img, svg{
+    height: 5rem;
+}
+.imgContainer{
+    padding: 1rem 0;
+}

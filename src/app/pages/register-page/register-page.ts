@@ -20,7 +20,11 @@ export class RegisterPage {
   router = inject(Router)
   errorMail = false;
   openDays: string[] = [];
+  errorMessage: string = '';
 
+  checkURL(url: string): boolean {
+    return /\.(jpeg|jpg|gif|png)$/i.test(url);
+  }
   async register(form: NgForm) {
     this.errorRegister = false;
     if (
@@ -80,11 +84,12 @@ export class RegisterPage {
         contact: form.value.contact
       }
     };
-    const ok = await this.restaurantService.register(request);
+    const res = await this.restaurantService.register(request);
     this.solicitudABackEnCurso = false;
 
-    if (!ok) {
+    if (res.ok == false) {
       this.errorRegister = true;
+      this.errorMessage = await res.text();
     }
     else {
       this.router.navigate(["/restaurant/:idRestaurant"]);

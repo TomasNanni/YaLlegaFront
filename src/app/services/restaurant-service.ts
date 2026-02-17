@@ -20,7 +20,7 @@ export class RestaurantService {
       },
       body: JSON.stringify(registrationRequest),
     });
-    return res.ok;
+    return res;
   }
   async getRestaurants() {
     const res = await fetch('https://localhost:7287/api/restaurants/GetAll', {

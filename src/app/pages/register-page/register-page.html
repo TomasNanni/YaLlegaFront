@@ -58,7 +58,7 @@
                 @if (secondPassword.invalid && !secondPassword.pristine) {
                 <p class="error">Debe colocar una contraseña de al menos 4 caracteres</p>
                 }
-                @if ((password.value !== secondPassword.value) && !password.pristine && !secondPassword.pristine) {
+                @if ((password.value !== secondPassword.value) && !password.pristine && !secondPassword.pristine && !secondPassword.value) {
                 <p class="error">Las contraseñas deben ser iguales</p>
                 }
             </div>
@@ -79,7 +79,7 @@
                     #urlLogoImage="ngModel">
             </div>
             <div class="errorContainer">
-                @if (urlLogoImage.errors?.['url'] && !urlLogoImage.pristine) {
+                @if (!checkURL(urlLogoImage.value) && !urlLogoImage.pristine) {
                 <p class="error">URL inválida</p>
                 }
                 @if (urlLogoImage.errors?.['required'] && !urlLogoImage.pristine) {
@@ -92,7 +92,7 @@
                     #urlBannerImage="ngModel">
             </div>
             <div class="errorContainer">
-                @if (urlBannerImage.errors?.['url'] && !urlBannerImage.pristine) {
+                @if (!checkURL(urlBannerImage.value) && !urlBannerImage.pristine) {
                 <p class="error">URL inválida</p>
                 }
             </div>
@@ -174,7 +174,7 @@
             </div>
             <div class="errorContainer">
                 @if (errorRegister) {
-                <p class="error">Ocurrio un error, intente nuevamente</p>
+                <p class="error">{{errorMessage}}</p>
                 }
                 @if (solicitudABackEnCurso) {
                 <!-- <app-spinner/> -->

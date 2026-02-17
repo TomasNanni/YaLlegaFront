@@ -1,11 +1,15 @@
 <app-top-bar-layout pageTitle="Lista de Restaurantes"></app-top-bar-layout>
 <div class="mainPageWithHeader">
-    @for (restaurant of restaurantsService.restaurants; track $index) {
-    <div>
-        <a [routerLink]="['/restaurant/',restaurant.id]">
-            <img [src]="restaurant.urlLogoImage" alt="Logo del restaurante">
-            <p>{{restaurant.name}}</p>
-        </a>
+    <div id="mainContainer">
+        @for (restaurant of restaurantsService.restaurants; track $index) {
+        <span class="restaurantContainer">
+            <a [routerLink]="['/restaurant/',restaurant.id]">
+                <div class="imgContainer">
+                    <img [src]="restaurant.urlLogoImage" alt="Logo del restaurante">
+                </div>
+                <p>{{restaurant.name}}</p>
+            </a>
+        </span>
+        }
     </div>
-    }
 </div>

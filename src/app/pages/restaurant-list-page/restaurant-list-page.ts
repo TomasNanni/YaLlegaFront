@@ -11,6 +11,7 @@ import { RestaurantService } from '../../services/restaurant-service';
 })
 export class RestaurantListPage {
   restaurantsService = inject(RestaurantService);
+
   ngOnInit(): void {
     this.restaurantsService.getRestaurants();
   }
