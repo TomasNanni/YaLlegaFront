@@ -1,14 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Category } from "../../components/category/category";
 import { TopBarLayout } from "../../layout/layout/top-bar-layout/top-bar-layout";
 import { Router, RouterLink } from '@angular/router';
 import { RestaurantService } from '../../services/restaurant-service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserRegistrationRequest } from '../../interfaces/auth';
+import { Spinner } from "../../spinner/spinner/spinner";
 
 @Component({
   selector: 'app-register-page',
-  imports: [TopBarLayout, FormsModule, RouterLink],
+  imports: [TopBarLayout, FormsModule, RouterLink, Spinner],
   templateUrl: './register-page.html',
   styleUrl: './register-page.scss',
 })
@@ -21,6 +22,7 @@ export class RegisterPage {
   errorMail = false;
   openDays: string[] = [];
   errorMessage: string = '';
+  private cdr = inject(ChangeDetectorRef);
 
   checkURL(url: string): boolean {
     return /\.(jpeg|jpg|gif|png)$/i.test(url);
@@ -90,6 +92,7 @@ export class RegisterPage {
     if (res.ok == false) {
       this.errorRegister = true;
       this.errorMessage = await res.text();
+      this.cdr.detectChanges();
     }
     else {
       this.router.navigate(["/restaurant/:idRestaurant"]);

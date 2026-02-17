@@ -3,11 +3,12 @@ import { AuthService } from "../../services/auth-service";
 import { Router, RouterModule } from "@angular/router";
 import { FormsModule, NgForm } from "@angular/forms";
 import { TopBarLayout } from "../../layout/layout/top-bar-layout/top-bar-layout";
+import { Spinner } from "../../spinner/spinner/spinner";
 
 
 @Component({
   selector: 'app-login-page',
-  imports: [FormsModule, RouterModule, TopBarLayout],
+  imports: [FormsModule, RouterModule, TopBarLayout, Spinner],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })

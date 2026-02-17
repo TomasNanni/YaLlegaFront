@@ -1,0 +1,21 @@
+.loader {
+  margin-top: clamp(1rem, 3vw, 1.5rem);
+  width: clamp(2rem, 5vw, 3rem);
+  height: clamp(2rem, 5vw, 3rem);
+  border: clamp(0.2rem, 0.5vw, 0.3rem) dotted #000000;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
