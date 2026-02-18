@@ -1,7 +1,9 @@
 #mainContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 4rem;
+    margin: 0 2rem;
+    justify-content: space-evenly;
 }
 
 .restaurantContainer {
@@ -11,10 +13,21 @@
     justify-content: center;
 }
 
-img,svg {
+img {
     height: 10rem;
+    width: 10rem;
 }
-a{
+svg{
+    height: 10rem;
+    width: 10rem;
+}
+#plus{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#link {
     text-decoration: underline;
 }
 
