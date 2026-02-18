@@ -11,8 +11,8 @@
             </a>
         </span>
         }
-        @if (!restaurantsService.restaurants) {
-            <a routerLink="/register">No hay restaurantes creados, sube el tuyo.</a>
+        @if (restaurantsService.restaurants.length === 0) {
+            <p class="restaurantContainer">No hay restaurantes disponibles. <a routerLink="/register">Registra tu restaurante</a></p>
         }
     </div>
 </div>

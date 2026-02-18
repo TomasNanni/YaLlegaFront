@@ -26,7 +26,7 @@ export class RestaurantService {
     const res = await fetch('https://localhost:7287/api/restaurants/GetAll', {
       method: 'GET',
     });
-    if (res.ok){
+    if (res.status == 200){
       const resJson : Restaurant[] = await res.json();
       resJson.sort((restaurant1, restaurant2) => restaurant1.name.localeCompare(restaurant2.name))
       this.restaurants = resJson;
