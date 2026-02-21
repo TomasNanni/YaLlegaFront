@@ -170,13 +170,13 @@
             </div>
             <div class="inputContainerForm">
                 <button class="mainInput"
-                    [disabled]="registerForm.invalid || solicitudABackEnCurso">Registrarse</button>
+                    [disabled]="registerForm.invalid || backRequestCurrently">Registrarse</button>
             </div>
             <div class="errorContainer">
                 @if (errorRegister) {
                 <p class="error">{{errorMessage}}</p>
                 }
-                @if (solicitudABackEnCurso) {
+                @if (backRequestCurrently) {
                     <app-spinner/>
                 }
             </div>
