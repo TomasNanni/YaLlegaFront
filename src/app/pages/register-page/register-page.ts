@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { Category } from "../../components/category/category";
 import { TopBarLayout } from "../../layout/layout/top-bar-layout/top-bar-layout";
 import { Router, RouterLink } from '@angular/router';
 import { RestaurantService } from '../../services/restaurant-service';
@@ -16,7 +15,7 @@ import { Spinner } from "../../spinner/spinner/spinner";
 export class RegisterPage {
   isLoading = false;
   errorRegister = false;
-  solicitudABackEnCurso = false;
+  backRequestCurrently = false;
   restaurantService = inject(RestaurantService);
   router = inject(Router)
   errorMail = false;
@@ -46,7 +45,7 @@ export class RegisterPage {
       this.errorRegister = true;
       return;
     }
-    this.solicitudABackEnCurso = true;
+    this.backRequestCurrently = true;
     if (form.value.monday) {
       this.openDays.push("monday");
     }
@@ -87,7 +86,7 @@ export class RegisterPage {
       }
     };
     const res = await this.restaurantService.register(request);
-    this.solicitudABackEnCurso = false;
+    this.backRequestCurrently = false;
 
     if (res.ok == false) {
       this.errorRegister = true;

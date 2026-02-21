@@ -14,6 +14,7 @@ export class AuthService {
   }
 
   token: null | string = localStorage.getItem("token");
+  idCart : null | string = localStorage.getItem("idCart");
   router = inject(Router);
   revisionTokenInterval: number | undefined;
 
@@ -60,5 +61,20 @@ export class AuthService {
         }
       }
     }, 600)
+  }
+  async validateOwner(restaurantId: number){
+    const res = await fetch ('https://localhost:7287/api/Authentication/validateOwner/' + restaurantId,
+    {
+      method : "GET",
+      headers: {
+        Authorization: 'Bearer ' + this.token,
+      },
+    });
+    if (res.ok) {
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }
