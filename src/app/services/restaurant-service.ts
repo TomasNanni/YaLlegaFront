@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { AuthService } from './auth-service';
 import { Restaurant } from '../interfaces/restaurant';
 import { UserRegistrationRequest } from '../interfaces/auth';
@@ -9,7 +9,8 @@ import { UserRegistrationRequest } from '../interfaces/auth';
 export class RestaurantService {
   authService = inject(AuthService)
 
-  restaurants : Restaurant [] = [];
+  restaurants = signal<Restaurant[]>([]);
+  restaurantsLoading = signal<boolean>(true);
 
   async register(registrationRequest: UserRegistrationRequest) {
     const res = await fetch('https://localhost:7287/api/users/Create', {
@@ -26,10 +27,24 @@ export class RestaurantService {
     const res = await fetch('https://localhost:7287/api/restaurants/GetAll', {
       method: 'GET',
     });
-    if (res.status == 200){
-      const resJson : Restaurant[] = await res.json();
+    if (res.status == 200) {
+      const resJson: Restaurant[] = await res.json();
       resJson.sort((restaurant1, restaurant2) => restaurant1.name.localeCompare(restaurant2.name))
-      this.restaurants = resJson;
+      this.restaurants.set(resJson);
     }
+    this.restaurantsLoading.set(false);
+  }
+  async getRestaurantById(idRestaurant: number) {
+    const res = await fetch('https://localhost:7287/api/restaurants/GetOneById/' + idRestaurant, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + this.authService.token,
+      },
+    });
+    if (res.ok) {
+      const resJson: Restaurant = await res.json();
+      return resJson;
+    }
+    return null;
   }
 }

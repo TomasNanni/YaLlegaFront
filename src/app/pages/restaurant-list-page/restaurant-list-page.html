@@ -1,7 +1,11 @@
 <app-top-bar-layout pageTitle="Lista de Restaurantes"></app-top-bar-layout>
 <div class="mainPageWithHeader">
+    @if (restaurantsService.restaurantsLoading()) {
+        <app-spinner></app-spinner>
+    }
+    @else {
     <div id="mainContainer">
-        @for (restaurant of restaurantsService.restaurants; track $index) {
+        @for (restaurant of restaurantsService.restaurants(); track $index) {
         <span class="restaurantContainer">
             <a [routerLink]="['/restaurant/',restaurant.id]">
                 <div class="imgContainer">
@@ -20,4 +24,5 @@
             </a>
         </span>
     </div>
+    }
 </div>
