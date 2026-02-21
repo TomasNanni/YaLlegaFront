@@ -4,10 +4,9 @@ import { LoginPage } from './pages/login-page/login-page';
 import { RegisterPage } from './pages/register-page/register-page';
 import { RestaurantListPage } from './pages/restaurant-list-page/restaurant-list-page';
 import { RestaurantPage } from './pages/restaurant-page/restaurant-page';
-import { Category } from './components/category/category';
-import { Product } from './components/product/product';
 import { ProductDetails } from './components/product-details/product-details';
 import { TopBarLayout } from './layout/layout/top-bar-layout/top-bar-layout';
+import { CartPage } from './pages/cart-page/cart-page';
 
 export const routes: Routes = [
     {
@@ -34,4 +33,10 @@ export const routes: Routes = [
         path: "productDetails/:idProduct",
         component: ProductDetails
     },
+    {
+        path: "cart/:idCart",
+        component: CartPage
+    },
+    
+
 ];
