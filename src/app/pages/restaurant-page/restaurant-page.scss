@@ -1,0 +1,45 @@
+#banner {
+    position: absolute;
+    width: 100%;
+    height: clamp(6rem, 20vw, 12rem);
+    object-fit: cover;
+    z-index: -1;
+}
+
+.container {
+    display: flex;
+}
+
+#bannerContainer {
+    justify-content: space-between;
+    height: clamp(6rem, 20vw, 12rem);
+    align-items: center;
+}
+
+.imgContainer {
+    margin: 0 clamp(0.6rem, 2vw, 1rem);
+
+    img {
+        width: clamp(4rem, 15vw, 7rem);
+        height: clamp(4rem, 15vw, 7rem);
+        border-radius: 15%;
+    }
+
+    svg {
+        width: clamp(2.5rem, 10vw, 4rem);
+        height: clamp(2.5rem, 10vw, 4rem);
+        border-radius: 30%;
+        background-color: black;
+        border: 0.3rem black solid;
+    }
+}
+
+.header {
+    background-color: var(--secondaryColor);
+    padding-inline: clamp(0.6rem, 4vw, 1.5rem);
+    padding-block: 0.4rem;
+}
+
+h1 {
+    font-size: clamp(1.6rem, 5.2vw, 2.3rem);
+}

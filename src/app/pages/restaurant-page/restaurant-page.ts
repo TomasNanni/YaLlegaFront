@@ -24,7 +24,7 @@ export class RestaurantPage implements OnInit {
   isOwner = false;
 
   async ngOnInit() {
-    this.categoryService.categories = undefined;
+    this.categoryService.categories = [];
     if (this.idRestaurant()) {
       this.restaurant = this.restaurantService.restaurants().find(restaurant => restaurant.id === this.idRestaurant());
       if (!this.restaurant) {
