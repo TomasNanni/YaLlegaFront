@@ -30,7 +30,7 @@ export class LoginPage {
     const loginResult = await this.authService.login(form.value);
     this.solicitudABackEnCurso = false;
 
-    if (loginResult) this.router.navigate(["/restaurant/:userId"]);
+    if (loginResult) this.router.navigate(["/restaurantList"]);
     this.errorLogin = true;
     this.cdr.detectChanges();
     return;
