@@ -1,19 +1,29 @@
 import { inject, Injectable } from '@angular/core';
-import { Category, NewCategory } from '../interfaces/category';
+import { Category, NewEditCategoryI } from '../interfaces/category';
 import { AuthService } from './auth-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
+  async getCategoryById(idCategory: number) {
+    const res = await fetch('https://localhost:7287/api/category/GetOneById/' + idCategory, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + this.authService.token,
+      },
+    });
+    if (res.ok) {
+      const resJson: Category = await res.json();
+      return resJson;
+    }
+    return null;
+  }
+  async editCategory(category : NewEditCategoryI, idCategory : number){
+    throw new Error('Method not implemented.');
+  }
   categories: Category[] = [];
   authService = inject(AuthService);
-  categoryNew: Category = {
-    id: 0,
-    name: "Nueva categoria",
-    description: "Crear una categoria nueva",
-    products: []
-  };
 
   async getRestaurantCategories(idRestaurant: number) {
     const res = await fetch('https://localhost:7287/api/category/GetRestaurantCategories/' + idRestaurant, {
@@ -25,7 +35,7 @@ export class CategoryService {
     }
   }
 
-  async createCategory(newCategory: NewCategory) {
+  async createCategory(newCategory: NewEditCategoryI) {
     const res = await fetch("https://localhost:7287/api/category/Create", {
       method: 'POST',
       headers: {
@@ -37,5 +47,6 @@ export class CategoryService {
     if (!res.ok) return;
     const resCategory: Category = await res.json();
     this.categories.push(resCategory);
+    return res;
   }
 }

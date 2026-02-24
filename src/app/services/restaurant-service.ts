@@ -37,9 +37,6 @@ export class RestaurantService {
   async getRestaurantById(idRestaurant: number) {
     const res = await fetch('https://localhost:7287/api/restaurants/GetOneById/' + idRestaurant, {
       method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + this.authService.token,
-      },
     });
     if (res.ok) {
       const resJson: Restaurant = await res.json();

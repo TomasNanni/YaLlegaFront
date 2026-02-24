@@ -1,4 +1,4 @@
-@if (loadingRestaurant) {
+@if (loadingRestaurant()) {
     <app-spinner></app-spinner>
 }
 @else {
@@ -16,13 +16,16 @@
         </div>
     </div>
     <header class="header"><h1>{{restaurant?.name}}</h1></header>
+    @if (categoryService.categories.length == 0) {
+        <h2 class="mainPageWithHeader">El restaurante no tiene productos</h2>
+    }
     <div class="mainPageWithHeader">
         <!-- container de categoria y sus productos -->
         @for (category of categoryService.categories; track $index) {
-            <app-category-item [category] = 'category'></app-category-item>
+            <app-category-item [isOwner]="isOwner" [category] = 'category'></app-category-item>
         }
     </div>
     @if (isOwner == true) {
-        <app-category-item [category]="categoryService.categoryNew"></app-category-item>
+        <app-category-item [isOwner]="isOwner" [category]="newCategory"></app-category-item>
     }
 }
