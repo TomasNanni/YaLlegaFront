@@ -2,11 +2,11 @@ import { Component, input, OnInit, Signal } from '@angular/core';
 import { Category, NewEditCategoryI } from '../../interfaces/category';
 import { ProductItem } from "../product-item/product-item";
 import { RouterLink } from '@angular/router';
-import { NewEditProduct } from "../../pages/new-edit-product/new-edit-product";
+import { NewProductItem } from "../new-product-item/new-product-item";
 
 @Component({
   selector: 'app-category-item',
-  imports: [ProductItem, RouterLink, NewEditProduct],
+  imports: [ProductItem, RouterLink, NewProductItem],
   templateUrl: './category-item.html',
   styleUrl: './category-item.scss',
 })
