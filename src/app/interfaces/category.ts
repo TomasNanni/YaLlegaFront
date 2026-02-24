@@ -1,15 +1,15 @@
-import { Product } from "./product"
+import { ProductDetailsI } from "./product"
 
 
 export interface Category {
-    id : number,
-    name : string,
-    description : string,
-    products : Product[]
+    id: number,
+    name: string,
+    description: string,
+    products: ProductDetailsI[]
 }
-export interface NewCategory{
+export interface NewEditCategoryI {
     name: string,
     description: string,
     RestaurantUserId: number,
-    productsId : number[];
+    productsId: number[];
 }
