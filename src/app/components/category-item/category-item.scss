@@ -1,0 +1,27 @@
+.categoryBanner {
+    background-color: var(--categoryColor);
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    margin: 0.3rem;
+    box-sizing: border-box;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    h2 {
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        margin: 0;
+    }
+
+    h3 {
+        font-size: clamp(0.7rem, 2.5vw, 1rem);
+        margin: 0;
+        font-weight: light;
+    }
+}
+@media (min-width : 400px){
+    .categoryBanner{
+        flex-wrap: nowrap;
+        gap: 2rem
+    }
+}

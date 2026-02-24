@@ -1,0 +1,43 @@
+<div class="mainPageWithHeader">
+    <form (ngSubmit)="handleFormSubmission(categoryForm)" #categoryForm="ngForm" class="form" id="form">
+        <div class="inputContainerForm">
+            <label for="name">Nombre</label>
+            <input class="mainInput" id="name" name="name" type="text" ngModel required="true" minlength="1"
+                maxlength="30" #name="ngModel" />
+            @if (name.dirty && name.invalid) {
+            <p class="error">El nombre es obligatorio y debe tener entre 1 y 20 caracteres</p>
+            }
+        </div>
+        <div class="inputContainerForm">
+            <label for="description">Descripción</label>
+            <input class="mainInput" id="description" name="description" type="text" ngModel maxlength="200"
+                #name="ngModel" />
+        </div>
+        <div class="inputContainerForm">
+            <label>Productos del Restaurante</label>
+            <div class="products-list">
+                @for (product of restaurantProducts; track product.id) {
+                <button (click)="toggleProductSelection(product.id)">
+                    <app-product-item [product]="product" />
+                </button>
+                }
+                @empty {
+                <p>No hay productos disponibles</p>
+                }
+            </div>
+        </div>
+        @if (backError) {
+        <p class="error">Error indeterminado, intente nuevamente.</p>
+        }
+        <div class="inputContainerForm">
+            @if(idCategory()){
+            <button [disabled]="categoryForm.invalid || backRequestInProgress">Editar Categoría</button>
+            } @else {
+            <button [disabled]="categoryForm.invalid || backRequestInProgress">Agregar Categoría</button>
+            }
+            @if (backRequestInProgress) {
+            <app-spinner />
+            }
+        </div>
+    </form>
+</div>

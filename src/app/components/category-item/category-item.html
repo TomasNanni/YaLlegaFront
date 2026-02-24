@@ -1,1 +1,26 @@
-<p>category-item works!</p>
+@if (isOwner() == true) {
+<a [routerLink]="['/category/Edit/', category().id]">
+    <div class="categoryBanner">
+        <h2>{{category().name}}</h2>
+        <h3>{{category().description}}</h3>
+    </div>
+</a>
+}
+@else {
+<div>
+    <h2>{{category().name}}</h2>
+    <h3>{{category().description}}</h3>
+</div>
+
+}
+
+<div>
+    @for (product of category().products; track product.id) {
+    <app-product-item [product]="product"></app-product-item>
+    }
+    @if (isOwner() == true) {
+    <a routerLink="/product/New">
+        <app-new-edit-product></app-new-edit-product>
+    </a>
+    }
+</div>
