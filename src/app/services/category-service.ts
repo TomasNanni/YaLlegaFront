@@ -1,11 +1,16 @@
 import { inject, Injectable } from '@angular/core';
 import { Category, NewEditCategoryI } from '../interfaces/category';
 import { AuthService } from './auth-service';
+import { ProductDetailsI } from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
+  categories: Category[] = [];
+  standoutCategory: Category | undefined;
+  authService = inject(AuthService);
+
   async getCategoryById(idCategory: number) {
     const res = await fetch('https://localhost:7287/api/category/GetOneById/' + idCategory, {
       method: 'GET',
@@ -19,11 +24,31 @@ export class CategoryService {
     }
     return null;
   }
-  async editCategory(category : NewEditCategoryI, idCategory : number){
+
+  async editCategory(category: NewEditCategoryI, idCategory: number) {
     throw new Error('Method not implemented.');
   }
-  categories: Category[] = [];
-  authService = inject(AuthService);
+
+  getStandoutCategory() {
+    const standoutProducts: ProductDetailsI[] = [];
+    this.categories.forEach(category => {
+      category.products.forEach(product => {
+        if (product.isStandout == true) {
+          standoutProducts.push(product);
+        }
+      });
+    });
+    if (standoutProducts.length > 0) {
+      this.standoutCategory = {
+        id: 0,
+        name: "Destacados",
+        description: "Nuestros mejores productos",
+        products: standoutProducts
+      };
+    } else {
+      this.standoutCategory = undefined;
+    }
+  }
 
   async getRestaurantCategories(idRestaurant: number) {
     const res = await fetch('https://localhost:7287/api/category/GetRestaurantCategories/' + idRestaurant, {

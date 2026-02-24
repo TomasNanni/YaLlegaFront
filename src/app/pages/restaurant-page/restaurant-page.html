@@ -19,6 +19,9 @@
     @if (categoryService.categories.length == 0) {
         <h2 class="mainPageWithHeader">El restaurante no tiene productos</h2>
     }
+    @if (categoryService.standoutCategory) {
+        <app-category-item [category]="categoryService.standoutCategory" [isOwner]="isOwner"></app-category-item>
+    }
     <div class="mainPageWithHeader">
         <!-- container de categoria y sus productos -->
         @for (category of categoryService.categories; track $index) {

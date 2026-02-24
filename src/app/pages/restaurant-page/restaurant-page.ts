@@ -42,6 +42,9 @@ export class RestaurantPage implements OnInit {
         this.isOwner = await this.auth.validateOwner(this.idRestaurant());
         this.restaurant = res;
         this.categoryService.getRestaurantCategories(this.idRestaurant());
+        if (this.categoryService.categories.length !== 0) {
+          this.categoryService.getStandoutCategory();
+        }
       }
       this.loadingRestaurant.set(false);
     }
