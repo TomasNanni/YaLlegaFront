@@ -24,8 +24,13 @@
     width: fit-content;
 }
 
-.productsContainer{
+.productContainer{
     margin: 1rem clamp(0.3rem, 5vw, 1.5rem);
+}
+.productsList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 @media (min-width : 400px){

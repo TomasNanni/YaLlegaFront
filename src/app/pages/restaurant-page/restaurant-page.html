@@ -27,16 +27,16 @@
 <header class="header">
     <h1>{{restaurant?.name}}</h1>
 </header>
-@if (categoryService.categories.length == 0) {
-<h2 class="mainPageWithHeader">El restaurante no tiene productos</h2>
+@if (categoryService.categories().length === 0) {
+<h2 class="mainPageWithHeader">El restaurante no tiene categorias</h2>
 }
 @if (categoryService.standoutCategory) {
 <app-category-item [idRestaurant]="idRestaurant()" [category]="categoryService.standoutCategory" [isOwner]="isOwner"></app-category-item>
 }
-@if (categoryService.categories.length > 0){
+@if (categoryService.categories().length > 0){
 <div>
     <!-- container de categoria y sus productos -->
-    @for (category of categoryService.categories; track $index) {
+    @for (category of categoryService.categories(); track $index) {
     <app-category-item [idRestaurant]="idRestaurant()" [isOwner]="isOwner" [category]='category'></app-category-item>
     }
 </div>

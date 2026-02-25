@@ -1,8 +1,17 @@
 #form{
     display: flex;
-    margin-top: 2%;
+    margin-top: 1%;
     flex-wrap: wrap;
     width: fit-content;
+}
+.mainPageWithHeader{
+    margin-top: 4%;
+}
+.inputContainerForm{
+    align-items: center;
+}
+.error{
+    text-align: center;
 }
 div{
     width: 100%;
@@ -11,6 +20,9 @@ div{
     div{
         padding: 0.6rem 0;
     }
+}
+.mainInput{
+    width: clamp(10rem, 20vw,15rem);
 }
 button{
     height: 2.2rem;
@@ -21,4 +33,25 @@ button.selected {
 }
 button:hover {
     filter: brightness(90%)
+}
+.categoryCheckbox {
+    display: flex;
+    max-width: fit-content;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.2s;
+    &:hover {
+        background-color: var(--secondaryColor);
+    }
+}
+.categoriesList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media (min-width: 620px) {
+    #form{
+        flex-wrap: nowrap;
+    }
 }

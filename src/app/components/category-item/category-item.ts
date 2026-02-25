@@ -14,5 +14,5 @@ export class CategoryItem {
   category = input.required<Category>();
   isOwner = input.required<boolean>();
   idRestaurant = input.required<number>();
-  showProducts = input<boolean>(true);
+
 }

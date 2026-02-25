@@ -14,13 +14,15 @@
     </div>
 </a>
 }
-@if (showProducts() == true) {
-<div class="productsContainer">
+<div class="productsList">
     @for (product of category().products; track product.id) {
-    <app-product-item [isOwner]="isOwner()" [idRestaurant]="idRestaurant()" [product]="product"></app-product-item>
+    <div class="productContainer">
+        <app-product-item [isOwner]="isOwner()" [idRestaurant]="idRestaurant()" [product]="product"></app-product-item>
+    </div>
     }
     @if (isOwner() == true) {
-    <app-new-product-item id="newProduct" [idRestaurant]="idRestaurant()"></app-new-product-item>
+    <div class="productContainer">
+        <app-new-product-item [idRestaurant]="idRestaurant()" id="newProduct"></app-new-product-item>
+    </div>
     }
 </div>
-}

@@ -9,10 +9,11 @@ import { NewEditProductI, ProductDetailsI } from '../../interfaces/product';
 import { ProductService } from '../../services/product-service';
 import { showConfirmModal, showCompletionModal } from '../../modals/modals';
 import { Router, RouterLink } from '@angular/router';
+import { TopBarLayout } from "../../layout/layout/top-bar-layout/top-bar-layout";
 
 @Component({
   selector: 'app-new-edit-product',
-  imports: [FormsModule, Spinner, CategoryItem, RouterLink],
+  imports: [FormsModule, Spinner, RouterLink, TopBarLayout],
   templateUrl: './new-edit-product.html',
   styleUrl: './new-edit-product.scss',
 })
@@ -44,6 +45,7 @@ export class NewEditProduct {
       this.router.navigate(["/"]);
     }
     else {
+      await this.categoryService.getRestaurantCategories(this.idRestaurant());
       if (this.idProduct()) {
         const res: ProductDetailsI | null = await this.productService.getProductById(this.idProduct()!);
         if (res) {
@@ -87,8 +89,8 @@ export class NewEditProduct {
       basePrice: parseInt(form.value.basePrice),
       discount: 0,
       isStandout: form.value.isStandout || false,
-      happyHourStart: form.value.happyHourStart || '',
-      happyHourEnd: form.value.happyHourEnd || '',
+      happyHourStart: form.value.happyHourStart || '00:00:00',
+      happyHourEnd: form.value.happyHourEnd || '00:00:00',
       categoriesId: this.selectedCategoryIds,
     };
 

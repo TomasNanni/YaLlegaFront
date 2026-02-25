@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Category, EditCategoryI, NewCategoryI } from '../interfaces/category';
 import { AuthService } from './auth-service';
 import { ProductDetailsI } from '../interfaces/product';
@@ -7,7 +7,7 @@ import { ProductDetailsI } from '../interfaces/product';
   providedIn: 'root',
 })
 export class CategoryService {
-  categories: Category[] = [];
+  categories = signal<Category[]>([]);
   standoutCategory: Category | undefined;
   authService = inject(AuthService);
   updatedCategory : EditCategoryI | undefined; 
@@ -48,7 +48,7 @@ export class CategoryService {
 
   getStandoutCategory() {
     const standoutProducts: ProductDetailsI[] = [];
-    this.categories.forEach(category => {
+    this.categories().forEach(category => {
       category.products.forEach(product => {
         if (product.isStandout == true) {
           standoutProducts.push(product);
@@ -73,7 +73,10 @@ export class CategoryService {
     });
     if (res.status == 200) {
       const resJson: Category[] = await res.json();
-      this.categories = resJson;
+      this.categories.set(resJson);
+      this.categories().forEach(category => {
+        console.log(category.id);
+      });
     }
   }
 
@@ -88,7 +91,7 @@ export class CategoryService {
     });
     if (!res.ok) return null;
     const resCategory: Category = await res.json();
-    this.categories.push(resCategory);
+    this.categories().push(resCategory);
     return res;
   }
 }

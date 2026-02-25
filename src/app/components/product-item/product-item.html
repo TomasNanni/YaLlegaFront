@@ -1,12 +1,14 @@
 @if (isOwner() == true) {
-<a [routerLink]="['/product', idRestaurant(), 'Edit/',product().id]">
+<a [routerLink]="['/product', idRestaurant(), 'Edit',product().id]">
     <div class="container">
         <img [src]="product().urlImage" alt="Imagen Producto">
         <p>{{product().name}}</p>
     </div>
 </a>
 }
+@else {
 <div class="container">
     <img [src]="product().urlImage" alt="Imagen Producto">
     <p>{{product().name}}</p>
 </div>
+}

@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    padding: 0.5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 15%;
+    margin-top: 0.7rem;
+    width: clamp(4.5rem, 20vw, 9.3rem);
+}
+
+img {
+    width: 100%;
+    height: auto;
+    margin: 0.4rem 0.4rem 0 0.4rem;
+    aspect-ratio: 1;
+}
+
+p {
+    margin: 0;
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    text-align: center;
+    width: 100%;
+    word-wrap: break-word;
+}

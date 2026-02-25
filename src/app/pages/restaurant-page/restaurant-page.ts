@@ -31,7 +31,7 @@ export class RestaurantPage implements OnInit {
   };
 
   async ngOnInit() {
-    this.categoryService.categories = [];
+    this.categoryService.categories.set([]);
     if (this.idRestaurant()) {
       this.restaurant = this.restaurantService.restaurants().find(restaurant => restaurant.id === this.idRestaurant());
       if (!this.restaurant) {

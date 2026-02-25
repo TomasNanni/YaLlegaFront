@@ -1,96 +1,114 @@
+@if(idProduct()){
+<app-top-bar-layout pageTitle="Editar Producto"></app-top-bar-layout>
+}
+@else {
+<app-top-bar-layout pageTitle="Crear Producto"></app-top-bar-layout>
+}
 <div class="mainPageWithHeader">
     <form (ngSubmit)="handleFormSubmission(productForm)" #productForm="ngForm" class="form" id="form">
-        <div class="inputContainerForm">
-            <label for="name">Nombre</label>
-            <input class="mainInput" id="name" name="name" type="text" ngModel required="true" #name="ngModel" />
-            <div class="errorContainer">
-                @if (name.dirty && name.invalid) {
-                <p class="error">El nombre es obligatorio</p>
-                }
-            </div>
-        </div>
-        <div class="inputContainerForm">
-            <label for="description">Descripción</label>
-            <input class="mainInput" id="description" name="description" type="text" ngModel maxlength="200"
-                #name="ngModel" />
-        </div>
-        <div class="inputContainerForm">
-            <label for="urlImage">URL de la imagen del producto</label>
-            <input class="mainInput" id="urlImage" name="urlImage" type="text" ngModel #urlImage="ngModel"
-                required="true" />
-            <div class="errorContainer">
-                @if (!checkURL(urlImage.value) && !urlImage.pristine && !urlImage.invalid) {
-                <p class="error">URL inválida</p>
-                }
-                @if (urlImage.errors?.['required'] && !urlImage.pristine) {
-                <p class="error">URL necesaria</p>
-                }
-            </div>
-        </div>
-        <div class="inputContainerForm">
-            <label for="mainInput">Precio Base</label>
-            <input class="mainInput" id="basePrice" name="basePrice" type="text" ngModel required="true"
-                #basePrice="ngModel" />
-            <div class="errorContainer">
-                @if (basePrice.dirty && basePrice.invalid) {
-                <p class="error">El precio es obligatorio</p>
-                }
-            </div>
-        </div>
-        <div class="inputContainerForm">
-            <label for="mainInput">Descuento</label>
-            <input class="mainInput" id="discount" name="discount" type="text" ngModel #discount="ngModel" />
-            <div class="errorContainer">
-                @if (discount.dirty && discount.value < 0) { <p class="error">El descuento no puede ser negativo</p>
+        <div>
+            <div class="inputContainerForm">
+                <label for="name">Nombre</label>
+                <input class="mainInput" id="name" name="name" type="text" ngModel required="true" #name="ngModel" />
+                <div class="errorContainer">
+                    @if (name.dirty && name.invalid) {
+                    <p class="error">El nombre es obligatorio</p>
                     }
+                </div>
+            </div>
+            <div class="inputContainerForm">
+                <label for="description">Descripción</label>
+                <input class="mainInput" id="description" name="description" type="text" ngModel maxlength="200"
+                    #name="ngModel" />
+                <div class="errorContainer"></div>
+            </div>
+            <div class="inputContainerForm">
+                <label for="urlImage">URL de la imagen del producto</label>
+                <input class="mainInput" id="urlImage" name="urlImage" type="text" ngModel #urlImage="ngModel"
+                    required="true" />
+                <div class="errorContainer">
+                    @if (!checkURL(urlImage.value) && !urlImage.pristine && !urlImage.invalid) {
+                    <p class="error">URL inválida</p>
+                    }
+                    @if (urlImage.errors?.['required'] && !urlImage.pristine) {
+                    <p class="error">URL necesaria</p>
+                    }
+                </div>
+            </div>
+            <div class="inputContainerForm">
+                <label for="mainInput">Precio Base</label>
+                <input class="mainInput" id="basePrice" name="basePrice" type="text" ngModel required="true"
+                    #basePrice="ngModel" />
+                <div class="errorContainer">
+                    @if (basePrice.dirty && basePrice.invalid) {
+                    <p class="error">El precio es obligatorio</p>
+                    }
+                </div>
+            </div>
+            <div class="inputContainerForm">
+                <label for="mainInput">Descuento</label>
+                <input class="mainInput" id="discount" name="discount" type="text" ngModel #discount="ngModel" />
+                <div class="errorContainer">
+                    @if (discount.dirty && discount.value < 0) { <p class="error">El descuento no puede ser negativo</p>
+                        }
+                </div>
             </div>
         </div>
-        <div class="inputContainerForm">
-            <label for="name">Destacado</label>
-            <input class="mainInput" id="isStandout" name="isStandout" type="checkbox" ngModel #isStandout="ngModel" />
+        <div>
+            <div class="inputContainerForm">
+                <label for="name">Destacado</label>
+                <input class="mainInput" id="isStandout" name="isStandout" type="checkbox" ngModel
+                    #isStandout="ngModel" />
+                <div class="errorContainer"></div>
+            </div>
+            <div class="inputContainerForm">
+                <label for="openingTime">Inicio de Happy Hour</label>
+                <input class="mainInput" name="happyHourStart" type="time" id="happyHourStart" ngModel
+                    #happyHourStart="ngModel">
+            </div>
             <div class="errorContainer"></div>
-        </div>
-        <div class="inputContainerForm">
-            <label for="openingTime">Inicio de Happy Hour</label>
-            <input class="mainInput" name="happyHourStart" type="time" id="happyHourStart" ngModel
-                #happyHourStart="ngModel">
-        </div>
-        <div class="errorContainer"></div>
-        <div class="inputContainerForm">
-            <label for="openingTime">Fin de Happy Hour</label>
-            <input class="mainInput" name="happyHourEnd" type="time" id="happyHourEnd" ngModel #happyHourEnd="ngModel">
-        </div>
-        <div class="inputContainerForm">
-            <label>Categorias del Restaurante</label>
-            <div class="categories-list">
-                @for (category of categoryService.categories; track $index) {
-                <button (click)="toggleCategorySelection(category.id)"
-                    [class.selected]="selectedCategoryIds.includes(category.id)">
-                    <app-category-item [isOwner]="isOwner" [idRestaurant]="idRestaurant()"
-                        [category]="category"></app-category-item>
-                </button>
-                }
-                @empty {
-                <a [routerLink]="['/category/', idRestaurant(),'New']">
-                    <app-category-item  [isOwner]="isOwner" [idRestaurant]="idRestaurant()"
-                        [category]="newCategory"></app-category-item>
-                </a>
+            <div class="inputContainerForm">
+                <label for="openingTime">Fin de Happy Hour</label>
+                <input class="mainInput" name="happyHourEnd" type="time" id="happyHourEnd" ngModel
+                    #happyHourEnd="ngModel">
+            </div>
+            <div class="inputContainerForm">
+                <label>Categorías del Restaurante</label>
+                <div class="categoriesList">
+                    @for (category of categoryService.categories(); track category.id) {
+                    <div class="categoryCheckbox">
+                        <input type="checkbox" [id]="'category-' + category.id"
+                            [checked]="selectedCategoryIds.includes(category.id)"
+                            (change)="toggleCategorySelection(category.id)" />
+                        <label [for]="'category-' + category.id">{{ category.name }}</label>
+                    </div>
+                    }
+                    @empty {
+                    <p>No hay categorías disponibles.
+                        <a [routerLink]="['/category/', idRestaurant(),'New']">Crear nueva categoría</a>
+                    </p>
+                    }
+                </div>
+            </div>
+            <div class="errorContainer">
+                @if (selectedCategoryIds.length === 0) {
+                <p class="error">Debe seleccionar al menos una categoría</p>
                 }
             </div>
-        </div>
-        <div class="errorContainer"></div>
-        @if (backError) {
-        <p class="error">Error indeterminado, intente nuevamente.</p>
-        }
-        <div class="inputContainerForm">
-            @if(idProduct()){
-            <button [disabled]="productForm.invalid || backRequestInProgress">Editar Producto</button>
-            } @else {
-            <button [disabled]="productForm.invalid || backRequestInProgress">Crear Producto</button>
+            <div class="errorContainer"></div>
+            @if (backError) {
+            <p class="error">Error indeterminado, intente nuevamente.</p>
             }
-            @if (backRequestInProgress() == true) {
-            <app-spinner />
-            }
+            <div class="inputContainerForm">
+                @if(idProduct()){
+                <button [disabled]="productForm.invalid || backRequestInProgress()">Editar Producto</button>
+                } @else {
+                <button [disabled]="productForm.invalid || backRequestInProgress()">Crear Producto</button>
+                }
+                @if (backRequestInProgress() == true) {
+                <app-spinner />
+                }
+            </div>
         </div>
     </form>
 </div>
