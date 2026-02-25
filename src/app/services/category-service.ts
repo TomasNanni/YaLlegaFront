@@ -7,10 +7,11 @@ import { ProductDetailsI } from '../interfaces/product';
   providedIn: 'root',
 })
 export class CategoryService {
+
   categories = signal<Category[]>([]);
   standoutCategory: Category | undefined;
   authService = inject(AuthService);
-  updatedCategory : EditCategoryI | undefined; 
+  updatedCategory: EditCategoryI | undefined;
 
   async getCategoryById(idCategory: number) {
     const res = await fetch('https://localhost:7287/api/category/GetOneById/' + idCategory, {
@@ -25,10 +26,23 @@ export class CategoryService {
     }
     return null;
   }
+  async deleteCategory(idCategory: number) {
+    const res = await fetch('https://localhost:7287/api/category/Delete/' + idCategory,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + this.authService.token,
+        },
+      });
+    if (!res.ok) return;
+    const newCategories= this.categories().filter(category => category.id !== idCategory);
+    this.categories.set(newCategories);
+    return true;
+  }
 
   async editCategory(category: NewCategoryI, idCategory: number) {
     this.updatedCategory = {
-      name : category.name,
+      name: category.name,
       description: category.description,
       productsId: category.productsId
     }

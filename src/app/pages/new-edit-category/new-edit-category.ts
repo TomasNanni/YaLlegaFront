@@ -54,6 +54,17 @@ export class NewEditCategory implements OnInit {
     }
   }
 
+  async deleteCategory(idCategory: number) {
+    if (this.idCategory() && this.isOwner == true) {
+      const message = await this.showConfirmalModalDelete();
+      if (message) {
+        const res = await this.categoryService.deleteCategory(this.idCategory()!);
+        this.showCompletionModalDelete();
+        if (res) this.router.navigate(['/restaurant', this.idRestaurant()]);
+      }
+    }
+  }
+
   toggleProductSelection(productId: number) {
     const index = this.selectedProductIds.indexOf(productId);
     if (index > -1) {
@@ -122,6 +133,11 @@ export class NewEditCategory implements OnInit {
       title: "Categoria editada correctamente",
     });
   }
+  showCompletionModalDelete() {
+    showCompletionModal.fire({
+      title: "Categoria borrada correctamente",
+    });
+  }
 
   showConfirmModalCreate() {
     return showConfirmModal.fire({
@@ -137,6 +153,17 @@ export class NewEditCategory implements OnInit {
   showCompletionModalCreate() {
     showCompletionModal.fire({
       title: "Categoria creada correctamente",
+    });
+  }
+  showConfirmalModalDelete() {
+    return showConfirmModal.fire({
+      confirmButtonText: "Confirmar",
+      title: "Confirma borrar la categoria?",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        return true;
+      };
+      return false;
     });
   }
 }

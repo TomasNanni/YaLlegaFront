@@ -21,7 +21,7 @@
             <input class="mainInput" id="description" name="description" type="text" ngModel maxlength="200"
                 #name="ngModel" />
         </div>
-        <input type="hidden" name="productsId"  ngModel #productsId = "ngModel"/>
+        <input type="hidden" name="productsId" ngModel #productsId="ngModel" />
         <div class="inputContainerForm">
             <label>Productos del Restaurante</label>
             <div class="products-list">
@@ -55,4 +55,7 @@
             }
         </div>
     </form>
+    @if (idCategory()) {
+    <button class="mainInput" (click)="deleteCategory(idCategory()!)">Borrar Categoria</button>
+    }
 </div>
