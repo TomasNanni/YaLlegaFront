@@ -3,6 +3,16 @@
     margin-top: 2%;
     flex-wrap: wrap;
     width: fit-content;
+    flex-direction: column;
+}
+.mainPageWithHeader{
+    margin-top: 4%;
+}
+.inputContainerForm{
+    align-items: center;
+}
+.error{
+    text-align: center;
 }
 div{
     width: 100%;
@@ -12,9 +22,15 @@ div{
         padding: 0.6rem 0;
     }
 }
+.mainInput{
+    width: clamp(10rem, 20vw,15rem);
+}
 button{
     height: 2.2rem;
     width: 9rem;
+}
+button.selected {
+  border: 0.3rem solid var(--secondaryColor);
 }
 button:hover {
     filter: brightness(90%)

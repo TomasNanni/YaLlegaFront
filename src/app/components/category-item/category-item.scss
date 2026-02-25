@@ -19,6 +19,15 @@
         font-weight: light;
     }
 }
+#newProduct{
+    display: block;
+    width: fit-content;
+}
+
+.productsContainer{
+    margin: 1rem clamp(0.3rem, 5vw, 1.5rem);
+}
+
 @media (min-width : 400px){
     .categoryBanner{
         flex-wrap: nowrap;

@@ -19,5 +19,5 @@ export interface NewEditProductI {
     isStandout: boolean,
     happyHourStart: string,
     happyHourEnd: string,
-    idCategory: number,
+    categoriesId: number[],
 }

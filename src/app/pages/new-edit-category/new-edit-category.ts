@@ -1,7 +1,7 @@
-import { Component, inject, input, OnInit, viewChild } from '@angular/core';
+import { Component, inject, input, OnInit, signal, viewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Category, NewEditCategoryI } from '../../interfaces/category';
+import { Category, NewCategoryI } from '../../interfaces/category';
 import { ProductDetailsI } from '../../interfaces/product';
 import { CategoryService } from '../../services/category-service';
 import { ProductService } from '../../services/product-service';
@@ -9,10 +9,11 @@ import { Spinner } from "../../spinner/spinner/spinner";
 import { ProductItem } from "../../components/product-item/product-item";
 import { AuthService } from '../../services/auth-service';
 import { showConfirmModal, showCompletionModal } from '../../modals/modals';
+import { TopBarLayout } from "../../layout/layout/top-bar-layout/top-bar-layout";
 
 @Component({
   selector: 'app-new-edit-category',
-  imports: [Spinner, ProductItem, FormsModule, RouterLink],
+  imports: [Spinner, ProductItem, FormsModule, TopBarLayout],
   templateUrl: './new-edit-category.html',
   styleUrl: './new-edit-category.scss',
 })
@@ -21,9 +22,9 @@ export class NewEditCategory implements OnInit {
   productService = inject(ProductService);
   router = inject(Router);
   backError = false;
-  backRequestInProgress = false;
+  backRequestInProgress = signal<boolean>(false);
   idCategory = input<number>();
-  restaurantId = input.required<number>();
+  idRestaurant = input.required<number>();
   category: Category | undefined;
   restaurantProducts: ProductDetailsI[] = [];
   selectedProductIds: number[] = [];
@@ -32,20 +33,21 @@ export class NewEditCategory implements OnInit {
   isOwner = false;
 
   async ngOnInit() {
-    this.isOwner = await this.auth.validateOwner(this.restaurantId());
-    if (!this.isOwner) {
-      return;
+    this.isOwner = await this.auth.validateOwner(this.idRestaurant());
+    if (this.isOwner == false) {
+      this.router.navigate(["/"]);
     }
     else {
-      if (this.idCategory()) {
+      if (this.idCategory() != 0) {
         const res: Category | null = await this.categoryService.getCategoryById(this.idCategory()!);
         if (res) {
           this.category = res;
+          this.restaurantProducts = this.category.products;
           this.selectedProductIds = this.category.products.map(p => p.id);
           this.form()?.setValue({
             name: this.category.name,
             description: this.category.description,
-            restaurantUserId: this.restaurantId(),
+            productsId: this.selectedProductIds,
           });
         }
       }
@@ -62,14 +64,14 @@ export class NewEditCategory implements OnInit {
   }
 
   async handleFormSubmission(form: NgForm) {
-    this.backRequestInProgress = true;
+    this.backRequestInProgress.set(true);
     this.backError = false;
 
-    const formCategory: NewEditCategoryI = {
+    const formCategory: NewCategoryI = {
       name: form.value.name,
       description: form.value.description || '',
-      RestaurantUserId: parseInt(form.value.restaurantUserId),
-      productsId: this.selectedProductIds
+      RestaurantUserId: this.idRestaurant(),
+      productsId: this.selectedProductIds,
     };
 
     let res;
@@ -77,10 +79,10 @@ export class NewEditCategory implements OnInit {
     if (this.idCategory()) {
       const message = await this.showConfirmModalEdit();
       if (message) {
-        res = await this.categoryService.editCategory( formCategory, this.category!.id);
-        this.showCompletionModalEdit();
+        res = await this.categoryService.editCategory(formCategory, this.idCategory()!);
+        this.showCompletionModalEdit;
       } else {
-        this.backRequestInProgress = false;
+        this.backRequestInProgress.set(false);
         return;
       }
     } else {
@@ -89,19 +91,19 @@ export class NewEditCategory implements OnInit {
         res = await this.categoryService.createCategory(formCategory);
         this.showCompletionModalCreate();
       } else {
-        this.backRequestInProgress = false;
+        this.backRequestInProgress.set(false);
         return;
       }
     }
 
     if (!res) {
-      this.backRequestInProgress = false;
+      this.backRequestInProgress.set(false)
       this.backError = true;
       return;
     }
 
-    this.backRequestInProgress = false;
-    this.router.navigate(["/restaurant", this.restaurantId()]);
+    this.backRequestInProgress.set(false);
+    this.router.navigate(["/restaurant", this.idRestaurant()]);
   }
 
   showConfirmModalEdit() {

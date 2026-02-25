@@ -1,1 +1,12 @@
-<p>{{product().name}}</p>
+@if (isOwner() == true) {
+<a [routerLink]="['/product', idRestaurant(), 'Edit/',product().id]">
+    <div class="container">
+        <img [src]="product().urlImage" alt="Imagen Producto">
+        <p>{{product().name}}</p>
+    </div>
+</a>
+}
+<div class="container">
+    <img [src]="product().urlImage" alt="Imagen Producto">
+    <p>{{product().name}}</p>
+</div>

@@ -4,16 +4,16 @@ export const showConfirmModal = Swal.mixin({
     showDenyButton: false,
     showCancelButton: true,
     showConfirmButton: true,
-    confirmButtonColor: "red",
+    confirmButtonColor: "var(--confirmColor)",
     cancelButtonText: "Cancelar",
-    background: "black",
-    color: "var(--textColor)",
+    background: "var(--backgroundSwalColor)",
+    color: "var(--secondaryColor)",
 });
 
 export const showCompletionModal = Swal.mixin({
-    background: "black",
-    color: "var(--textColor)",
+    background: "var(--backgroundSwalColor)",
+    color: "var(--secondaryColor)",
     showConfirmButton: true,
-    confirmButtonColor: "var(--secondary-color)",
+    confirmButtonColor: "var(--confirmColor)",
     icon: "success"
 })

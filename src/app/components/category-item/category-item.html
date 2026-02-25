@@ -1,5 +1,5 @@
-@if (isOwner() == true) {
-<a [routerLink]="['/category/Edit/', category().id]">
+@if (isOwner() == true && category().id == 0) {
+<a [routerLink]="['/category', idRestaurant(),'New']">
     <div class="categoryBanner">
         <h2>{{category().name}}</h2>
         <h3>{{category().description}}</h3>
@@ -7,20 +7,20 @@
 </a>
 }
 @else {
-<div>
-    <h2>{{category().name}}</h2>
-    <h3>{{category().description}}</h3>
-</div>
-
+<a [routerLink]="['/category/', idRestaurant(), 'Edit', category().id]">
+    <div class="categoryBanner">
+        <h2>{{category().name}}</h2>
+        <h3>{{category().description}}</h3>
+    </div>
+</a>
 }
-
-<div>
+@if (showProducts() == true) {
+<div class="productsContainer">
     @for (product of category().products; track product.id) {
-    <app-product-item [product]="product"></app-product-item>
+    <app-product-item [isOwner]="isOwner()" [idRestaurant]="idRestaurant()" [product]="product"></app-product-item>
     }
     @if (isOwner() == true) {
-    <a routerLink="/product/New">
-        <app-new-product-item></app-new-product-item>
-    </a>
+    <app-new-product-item id="newProduct" [idRestaurant]="idRestaurant()"></app-new-product-item>
     }
 </div>
+}

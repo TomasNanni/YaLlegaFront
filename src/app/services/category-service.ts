@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Category, NewEditCategoryI } from '../interfaces/category';
+import { Category, EditCategoryI, NewCategoryI } from '../interfaces/category';
 import { AuthService } from './auth-service';
 import { ProductDetailsI } from '../interfaces/product';
 
@@ -10,6 +10,7 @@ export class CategoryService {
   categories: Category[] = [];
   standoutCategory: Category | undefined;
   authService = inject(AuthService);
+  updatedCategory : EditCategoryI | undefined; 
 
   async getCategoryById(idCategory: number) {
     const res = await fetch('https://localhost:7287/api/category/GetOneById/' + idCategory, {
@@ -25,8 +26,24 @@ export class CategoryService {
     return null;
   }
 
-  async editCategory(category: NewEditCategoryI, idCategory: number) {
-    throw new Error('Method not implemented.');
+  async editCategory(category: NewCategoryI, idCategory: number) {
+    this.updatedCategory = {
+      name : category.name,
+      description: category.description,
+      productsId: category.productsId
+    }
+    const res = await fetch("https://localhost:7287/api/category/Update/" + idCategory, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.authService.token,
+      },
+      body: JSON.stringify(this.updatedCategory),
+    });
+    if (!res.ok) {
+      return;
+    }
+    return res;
   }
 
   getStandoutCategory() {
@@ -60,7 +77,7 @@ export class CategoryService {
     }
   }
 
-  async createCategory(newCategory: NewEditCategoryI) {
+  async createCategory(newCategory: NewCategoryI) {
     const res = await fetch("https://localhost:7287/api/category/Create", {
       method: 'POST',
       headers: {
@@ -69,7 +86,7 @@ export class CategoryService {
       },
       body: JSON.stringify(newCategory),
     });
-    if (!res.ok) return;
+    if (!res.ok) return null;
     const resCategory: Category = await res.json();
     this.categories.push(resCategory);
     return res;

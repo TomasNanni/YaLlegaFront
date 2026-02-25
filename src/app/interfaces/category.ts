@@ -7,9 +7,14 @@ export interface Category {
     description: string,
     products: ProductDetailsI[]
 }
-export interface NewEditCategoryI {
+export interface NewCategoryI {
     name: string,
     description: string,
     RestaurantUserId: number,
+    productsId: number[];
+}
+export interface EditCategoryI{
+    name: string,
+    description: string,
     productsId: number[];
 }

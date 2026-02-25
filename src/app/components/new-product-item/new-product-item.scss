@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    padding: 0.3rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 15%;
+    margin-top: 0.7rem;
+}
+svg {
+    width: clamp(2rem, 40vw, 9rem);
+    height: clamp(2rem, 40vw, 9rem);
+}
+p {
+    margin: 0;
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    text-align: center;
+}

@@ -1,24 +1,34 @@
+@if(idCategory()){
+<app-top-bar-layout pageTitle="Editar Categoria"></app-top-bar-layout>
+}
+@else {
+<app-top-bar-layout pageTitle="Crear Categoria"></app-top-bar-layout>
+}
 <div class="mainPageWithHeader">
     <form (ngSubmit)="handleFormSubmission(categoryForm)" #categoryForm="ngForm" class="form" id="form">
         <div class="inputContainerForm">
             <label for="name">Nombre</label>
             <input class="mainInput" id="name" name="name" type="text" ngModel required="true" minlength="1"
                 maxlength="30" #name="ngModel" />
-            @if (name.dirty && name.invalid) {
-            <p class="error">El nombre es obligatorio y debe tener entre 1 y 20 caracteres</p>
-            }
+            <div class="errorContainer">
+                @if (name.dirty && name.invalid) {
+                <p class="error">El nombre es obligatorio y debe tener entre 1 y 30 caracteres</p>
+                }
+            </div>
         </div>
         <div class="inputContainerForm">
             <label for="description">Descripción</label>
             <input class="mainInput" id="description" name="description" type="text" ngModel maxlength="200"
                 #name="ngModel" />
         </div>
+        <input type="hidden" name="productsId"  ngModel #productsId = "ngModel"/>
         <div class="inputContainerForm">
             <label>Productos del Restaurante</label>
             <div class="products-list">
                 @for (product of restaurantProducts; track product.id) {
-                <button (click)="toggleProductSelection(product.id)">
-                    <app-product-item [product]="product" />
+                <button type="button" (click)="toggleProductSelection(product.id)"
+                    [class.selected]="selectedProductIds.includes(product.id)">
+                    <app-product-item [isOwner]="isOwner" [product]="product" />
                 </button>
                 }
                 @empty {
@@ -26,16 +36,21 @@
                 }
             </div>
         </div>
-        @if (backError) {
-        <p class="error">Error indeterminado, intente nuevamente.</p>
-        }
+        <div class="errorContainer">
+            @if (backError) {
+            <p class="error">Error indeterminado, intente nuevamente.</p>
+            }
+        </div>
+
         <div class="inputContainerForm">
             @if(idCategory()){
-            <button [disabled]="categoryForm.invalid || backRequestInProgress">Editar Categoría</button>
+            <button class="mainInput" [disabled]="categoryForm.invalid || backRequestInProgress()">Editar
+                Categoría</button>
             } @else {
-            <button [disabled]="categoryForm.invalid || backRequestInProgress">Agregar Categoría</button>
+            <button class="mainInput" [disabled]="categoryForm.invalid || backRequestInProgress()">Agregar
+                Categoría</button>
             }
-            @if (backRequestInProgress) {
+            @if (backRequestInProgress() == true) {
             <app-spinner />
             }
         </div>

@@ -40,19 +40,19 @@ export const routes: Routes = [
         component: CartPage
     },
     {
-        path: "category/Edit/:idCategory",
+        path: "category/:idRestaurant/Edit/:idCategory",
         component: NewEditCategory,
     },
     {
-        path: "category/New",
+        path: "category/:idRestaurant/New",
         component: NewEditCategory,
     },
     {
-        path: "product/New",
+        path: "product/:idRestaurant/New",
         component: NewEditProduct,
     },
     {
-        path: "product/Edit/:idProduct",
+        path: "product/:idRestaurant/Edit/:idProduct",
         component: NewEditProduct,
     }
 ];
