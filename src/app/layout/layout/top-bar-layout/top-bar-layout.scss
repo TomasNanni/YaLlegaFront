@@ -6,7 +6,6 @@
 	position: sticky;
 	top: 0;
 	z-index: 10000;
-	background-color: var(--topBarColor);
 }
 
 .Header {
@@ -22,25 +21,63 @@
 	min-width: 0;
 	h1 {
 		color: var(--logoColor);
-		font-size: clamp(2.1rem, 5.2vw, 2.3rem);
+		font-size: clamp(2.8rem, 6.5vw, 3.2rem); 
 		white-space: nowrap;
 	}
 
 	h2 {
-		font-size: clamp(1.6rem, 5.5vw, 2rem);
+		font-size: clamp(1.4rem, 4.5vw, 1.7rem);
 	}
 }
 
 svg {
 	color: var(--logoColor);
-	height: clamp(1.4rem, 5vw, 2.2rem);
-}
-
-#secondarySVG{
-	fill: var(--textColor);
+	height: clamp(2.8rem, 6.5vw, 3.2rem);
 }
 
 #secondaryHeader {
 	background-color: var(--secondaryColor);
 	font-family: var(--textFont);
+}
+
+#mainHeader {
+	position: relative;
+}
+
+#ownerBtn {
+	position: absolute;
+	left: 80%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+	text-decoration: none;
+	color: var(--topBarColor);
+	background-color: #ffffff;
+	padding: 0.35rem 0.7rem;
+	border-radius: 0.6rem;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	opacity: 0.92;
+
+	&:hover {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1.05);
+	}
+
+	svg {
+		height: clamp(1.4rem, 3.5vw, 1.8rem);
+		width: auto;
+		fill: var(--topBarColor);
+	}
+
+	span {
+		font-family: var(--textFont);
+		font-size: clamp(0.5rem, 1.4vw, 0.68rem);
+		text-align: center;
+		white-space: nowrap;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+	}
 }

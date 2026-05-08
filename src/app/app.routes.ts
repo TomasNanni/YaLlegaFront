@@ -12,10 +12,6 @@ import { NewEditProduct } from './pages/new-edit-product/new-edit-product';
 
 export const routes: Routes = [
     {
-        path: "",
-        component: LandingPage,
-    },
-    {
         path: "login",
         component: LoginPage
     },
@@ -24,7 +20,7 @@ export const routes: Routes = [
         component: RegisterPage
     },
     {
-        path: "restaurantList",
+        path: "",
         component: RestaurantListPage
     },
     {
