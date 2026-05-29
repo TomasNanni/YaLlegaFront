@@ -1,3 +1,5 @@
+
+
 #Logo {
 	display: flex;
 	flex-direction: column;
@@ -38,17 +40,15 @@ svg {
 #secondaryHeader {
 	background-color: var(--secondaryColor);
 	font-family: var(--textFont);
+	flex-wrap: wrap;
+	position: relative;
 }
 
 #mainHeader {
 	position: relative;
 }
 
-#ownerBtn {
-	position: absolute;
-	left: 80%;
-	top: 50%;
-	transform: translate(-50%, -50%);
+.ownerBtn {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -60,10 +60,11 @@ svg {
 	border-radius: 0.6rem;
 	transition: opacity 0.2s ease, transform 0.2s ease;
 	opacity: 0.92;
+	margin-right: clamp(0.6rem, 4vw, 1.5rem);
 
 	&:hover {
 		opacity: 1;
-		transform: translate(-50%, -50%) scale(1.05);
+		transform: scale(1.05);
 	}
 
 	svg {
@@ -76,8 +77,16 @@ svg {
 		font-family: var(--textFont);
 		font-size: clamp(0.5rem, 1.4vw, 0.68rem);
 		text-align: center;
-		white-space: nowrap;
 		font-weight: 600;
-		letter-spacing: 0.01em;
+	}
+
+	@media (min-width: 850px) {
+		position: absolute;
+		right: 1.5rem;
+		top: 50%;
+		transform: translateY(-50%);
+		&:hover {
+			transform: translateY(-50%) scale(1.05);
+		}
 	}
 }

@@ -76,4 +76,27 @@ export class AuthService {
       return false;
     }
   }
+
+  /** Extrae el ID del restaurante del token JWT */
+  getRestaurantIdFromToken(): number | null {
+    if (!this.token) {
+      return null;
+    }
+
+    try {
+      const base64Url = this.token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      const claims = JSON.parse(jsonPayload);
+      const restaurantId = claims['nameid'] || claims['sub'] || null;
+      
+      return restaurantId ? parseInt(restaurantId) : null;
+    } catch (error) {
+      console.error('Error decodificando token:', error);
+      return null;
+    }
+  }
 }
