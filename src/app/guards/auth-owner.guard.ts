@@ -4,24 +4,24 @@ import { AuthService } from '../services/auth-service';
 
 /**
  * Guard para dueños (usuarios con rol owner).
- * - Bloquea el acceso a register, login y la lista de restaurantes.
- * - Si hay token, valida que el restaurante en la ruta le pertenezca.
- * - Sin token, redirige a la landing page.
+ * - Sin token: permite el acceso (guests pueden ver lista de restaurantes, login, etc.)
+ * - Con token: valida que el restaurante en la ruta le pertenezca al owner.
+ * - Si no es propietario del restaurante, redirige a su propio restaurante.
  */
 export const authOwnerGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Si no hay token, redirigir a landing page
+  // Sin token: el usuario es un guest, puede acceder libremente
   if (!authService.token) {
-    const redirectPath = router.parseUrl('/');
-    return new RedirectCommand(redirectPath, {
-      skipLocationChange: true,
-    });
+    return true;
   }
 
   // Obtener el idRestaurant de los parámetros de la ruta
   const idRestaurant = route.paramMap.get('idRestaurant');
+
+  // Obtener el restaurantId del token
+  const restaurantId = authService.getRestaurantIdFromToken();
 
   if (idRestaurant) {
     // Validar que el usuario es propietario del restaurante
@@ -29,7 +29,6 @@ export const authOwnerGuard: CanActivateFn = async (route, state) => {
 
     if (!isOwner) {
       // Si no es propietario, redirigir a su propio restaurante
-      const restaurantId = authService.getRestaurantIdFromToken();
       if (restaurantId) {
         const redirectPath = router.parseUrl(`/restaurant/${restaurantId}`);
         return new RedirectCommand(redirectPath, {
@@ -40,6 +39,9 @@ export const authOwnerGuard: CanActivateFn = async (route, state) => {
       }
       return false;
     }
+  } else if (restaurantId) {
+    const redirectPath = router.parseUrl(`/restaurant/${restaurantId}`);
+    return new RedirectCommand(redirectPath, { skipLocationChange: false });
   }
 
   return true;

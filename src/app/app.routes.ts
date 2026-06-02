@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { LandingPage } from './pages/landing-page/landing-page';
 import { LoginPage } from './pages/login-page/login-page';
 import { RegisterPage } from './pages/register-page/register-page';
 import { RestaurantListPage } from './pages/restaurant-list-page/restaurant-list-page';
@@ -14,25 +13,21 @@ import { authOwnerGuard } from './guards/auth-owner.guard';
 
 export const routes: Routes = [
     {
-        // Login: bloqueado para dueños (redirige a su restaurante)
-        path: 'login',
-        component: LoginPage,
-        canActivate: [authOwnerGuard]
-    },
-    {
-        // Register: bloqueado para dueños
-        path: 'register',
-        component: RegisterPage,
-        canActivate: [authOwnerGuard]
-    },
-    {
-        // Lista de restaurantes: bloqueada para dueños
         path: '',
         component: RestaurantListPage,
         canActivate: [authOwnerGuard]
     },
     {
-        // Restaurante: bloqueado para dueños de otro restaurante
+        path: 'login',
+        component: LoginPage,
+        canActivate: [authOwnerGuard]
+    },
+    {
+        path: 'register',
+        component: RegisterPage,
+        canActivate: [authOwnerGuard]
+    },
+    {
         path: 'restaurant/:idRestaurant',
         component: RestaurantPage,
         canActivate: [authOwnerGuard]
@@ -46,25 +41,21 @@ export const routes: Routes = [
         component: CartPage
     },
     {
-        // Editar categoría: requiere estar logueado (guestGuard) + ser dueño (authOwnerGuard)
         path: 'category/:idRestaurant/Edit/:idCategory',
         component: NewEditCategory,
         canActivate: [guestGuard, authOwnerGuard]
     },
     {
-        // Nueva categoría: requiere estar logueado + ser dueño
         path: 'category/:idRestaurant/New',
         component: NewEditCategory,
         canActivate: [guestGuard, authOwnerGuard]
     },
     {
-        // Nuevo producto: requiere estar logueado + ser dueño
         path: 'product/:idRestaurant/New',
         component: NewEditProduct,
         canActivate: [guestGuard, authOwnerGuard]
     },
     {
-        // Editar producto: requiere estar logueado + ser dueño
         path: 'product/:idRestaurant/Edit/:idProduct',
         component: NewEditProduct,
         canActivate: [guestGuard, authOwnerGuard]
