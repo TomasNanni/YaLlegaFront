@@ -88,9 +88,6 @@ export class CategoryService {
     if (res.status == 200) {
       const resJson: Category[] = await res.json();
       this.categories.set(resJson);
-      this.categories().forEach(category => {
-        console.log(category.id);
-      });
     }
   }
 
