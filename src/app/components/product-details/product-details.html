@@ -1,1 +1,49 @@
-<p>product-details works!</p>
+@if (loadingProduct()) {
+  <app-spinner></app-spinner>
+} @else if (product) {
+  <div class="productDetailsContainer">
+    <button class="backButton" (click)="goBack()">
+      ← Volver
+    </button>
+
+    <div class="productCard">
+      <div class="imgContainer">
+        <img [src]="product.urlImage" [alt]="product.name" />
+
+        @if (product.isStandout) {
+          <span class="badge badgeStandout">¡Destacado!</span>
+        }
+
+        @if (isHappyHour()) {
+          <span class="badge badgeHappyHour">¡Happy Hour!</span>
+        }
+      </div>
+
+      <div class="productInfo">
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+
+        <div class="pricingContainer">
+          <div class="priceItem">
+            <span>Precio:</span>
+            <span class="price">${{ product.discount > 0 ? (product.basePrice * (1 - product.discount / 100)).toFixed(2) : product.basePrice }}</span>
+          </div>
+        </div>
+
+        <button
+          class="addToCartBtn"
+          (click)="handleAddToCart()"
+          [disabled]="cartRequestInProgress"
+        >
+          @if (cartRequestInProgress) {
+            Agregando...
+          } @else {
+            + Agregar al carrito
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+} @else {
+  <p class="error">Producto no encontrado</p>
+}

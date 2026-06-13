@@ -7,8 +7,10 @@
 </a>
 }
 @else {
-<div class="container">
-    <img [src]="product().urlImage" alt="Imagen Producto">
-    <p>{{product().name}}</p>
-</div>
+<a [routerLink]="['/productDetails', idRestaurant(), product().id]">
+    <div class="container">
+        <img [src]="product().urlImage" alt="Imagen Producto">
+        <p>{{product().name}}</p>
+    </div>
+</a>
 }

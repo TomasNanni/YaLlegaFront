@@ -33,7 +33,7 @@ export const routes: Routes = [
         canActivate: [authOwnerGuard]
     },
     {
-        path: 'productDetails/:idProduct',
+        path: 'productDetails/:idRestaurant/:idProduct',
         component: ProductDetails
     },
     {
