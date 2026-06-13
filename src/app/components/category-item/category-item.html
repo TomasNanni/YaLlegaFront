@@ -6,13 +6,19 @@
     </div>
 </a>
 }
-@else {
+@if (isOwner() == true && category().id != 0) {
 <a [routerLink]="['/category/', idRestaurant(), 'Edit', category().id]">
     <div class="categoryBanner">
         <h2>{{category().name}}</h2>
         <h3>{{category().description}}</h3>
     </div>
 </a>
+}
+@else {
+<div class="categoryBanner">
+    <h2>{{category().name}}</h2>
+    <h3>{{category().description}}</h3>
+</div>
 }
 <div class="productsList">
     @for (product of category().products; track product.id) {
