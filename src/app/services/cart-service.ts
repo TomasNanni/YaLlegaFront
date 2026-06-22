@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthService } from './auth-service';
+import { CartProductI } from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +45,53 @@ export class CartService {
         body: JSON.stringify([productId]),
       }
     );
+    return res.ok;
+  }
+
+  async getCart(cartId: number): Promise<CartProductI[] | null> {
+    const res = await fetch(
+      `https://localhost:7287/api/Carts/GetOneByid/${cartId}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + this.authService.token,
+        },
+      }
+    );
+    if (!res.ok) return null;
+    const resJson: CartProductI[] = await res.json();
+    return resJson;
+  }
+
+  async deleteProduct(cartId: number, productIds: number[]): Promise<boolean> {
+    const res = await fetch(
+      `https://localhost:7287/api/Carts/DeleteProducts/${cartId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.authService.token,
+        },
+        body: JSON.stringify(productIds),
+      }
+    );
+    return res.ok;
+  }
+
+  async deleteCart(cartId: number): Promise<boolean> {
+    const res = await fetch(
+      `https://localhost:7287/api/Carts/Delete/${cartId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: 'Bearer ' + this.authService.token,
+        },
+      }
+    );
+    if (res.ok) {
+      localStorage.removeItem('idCart');
+      this.authService.idCart = null;
+    }
     return res.ok;
   }
 }

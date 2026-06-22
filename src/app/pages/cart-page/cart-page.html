@@ -1,1 +1,85 @@
-<p>cart-page works!</p>
+<app-top-bar-layout pageTitle="Tu carrito"></app-top-bar-layout>
+
+<div class="mainPageWithHeader">
+  @if (loading()) {
+    <app-spinner></app-spinner>
+  } @else if (groups().length === 0) {
+    <div class="empty-state" id="empty-cart">
+      <div class="empty-icon">🛒</div>
+      <p class="empty-title">Tu carrito está vacío</p>
+      <p class="empty-subtitle">Explorá los restaurantes y agregá productos a tu pedido.</p>
+      <a routerLink="/" class="explore-btn" id="explore-restaurants-btn">Ver restaurantes</a>
+    </div>
+  } @else {
+    <div class="cart-content">
+      @for (group of groups(); track group.restaurantId) {
+        <section class="restaurant-group" [id]="'group-' + group.restaurantId">
+          <h2 class="restaurant-name">{{ group.restaurantName }}</h2>
+
+          <ul class="product-list">
+            @for (product of group.products; track product.id) {
+              <li class="cart-item" [id]="'product-' + product.id">
+                <img
+                  class="product-img"
+                  [src]="product.urlImage"
+                  [alt]="product.name"
+                />
+                <div class="product-info">
+                  <span class="product-name">{{ product.name }}</span>
+                  <div class="product-price-row">
+                    @if (product.discount > 0) {
+                      <span class="original-price">${{ product.basePrice }}</span>
+                      <span class="discount-badge">-{{ product.discount }}%</span>
+                    }
+                    <span class="final-price">${{ finalPrice(product) }}</span>
+                  </div>
+                </div>
+                <button
+                  class="delete-product-btn"
+                  [id]="'delete-product-' + product.id"
+                  (click)="onDeleteProduct(product.id)"
+                  title="Eliminar del carrito"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                    <path d="M10 11v6"></path>
+                    <path d="M14 11v6"></path>
+                    <path d="M9 6V4h6v2"></path>
+                  </svg>
+                </button>
+              </li>
+            }
+          </ul>
+
+          <div class="group-footer">
+            <span class="subtotal-label">Subtotal: <strong>${{ subtotal(group) }}</strong></span>
+            <button
+              class="order-btn"
+              [id]="'order-btn-' + group.restaurantId"
+              (click)="onPlaceOrder(group)"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.531 5.847L.051 23.5l5.805-1.522A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+              </svg>
+              Pedir por WhatsApp
+            </button>
+          </div>
+        </section>
+      }
+
+      <div class="cart-global-footer">
+        <button class="delete-all-btn" id="delete-all-btn" (click)="onDeleteAll()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+          </svg>
+          Vaciar carrito
+        </button>
+      </div>
+    </div>
+  }
+</div>

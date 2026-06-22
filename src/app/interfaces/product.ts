@@ -21,3 +21,17 @@ export interface NewEditProductI {
     happyHourEnd: string,
     categoriesId: number[],
 }
+
+export interface CartProductI {
+    id: number,
+    name: string,
+    description: string,
+    urlImage: string,
+    basePrice: number,
+    discount: number,
+    isStandout: boolean,
+    happyHourStart: string | null,
+    happyHourEnd: string | null,
+    restaurantId: number,
+    restaurantName: string,
+}

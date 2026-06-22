@@ -1,0 +1,240 @@
+.cart-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vw, 1.6rem);
+  width: clamp(18rem, 90vw, 52rem);
+}
+
+// ─── Estado vacío ─────────────────────────────────────────────────────────────
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+  padding: clamp(2rem, 8vw, 4rem) 1rem;
+
+  .empty-icon {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    margin-bottom: 0.3rem;
+  }
+}
+
+.empty-title {
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+  font-weight: 700;
+}
+
+.empty-subtitle {
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  color: var(--errorColor);
+  max-width: 28ch;
+  line-height: 1.5;
+}
+
+.explore-btn {
+  margin-top: 0.5rem;
+  display: inline-block;
+  background-color: var(--topBarColor);
+  color: var(--secondaryColor);
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.5rem;
+  font-size: clamp(0.65rem, 2vw, 0.8rem);
+  font-weight: 600;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+// ─── Grupo por restaurante ────────────────────────────────────────────────────
+
+.restaurant-group {
+  border: 0.15rem var(--topBarColor) solid;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.restaurant-name {
+  background-color: var(--topBarColor);
+  color: var(--secondaryColor);
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  font-weight: 700;
+  padding: 0.5rem clamp(0.7rem, 3vw, 1.2rem);
+}
+
+// ─── Lista de productos ───────────────────────────────────────────────────────
+
+.product-list {
+  padding: 0.3rem 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 0.9rem);
+  padding: clamp(0.4rem, 1.5vw, 0.7rem) clamp(0.7rem, 3vw, 1.2rem);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.product-img {
+  width: clamp(2.8rem, 9vw, 3.8rem);
+  height: clamp(2.8rem, 9vw, 3.8rem);
+  object-fit: cover;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.product-name {
+  font-size: clamp(0.7rem, 2.2vw, 0.85rem);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-price-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.original-price {
+  font-size: clamp(0.6rem, 1.8vw, 0.7rem);
+  color: var(--errorColor);
+  text-decoration: line-through;
+}
+
+.discount-badge {
+  font-size: clamp(0.55rem, 1.6vw, 0.65rem);
+  font-weight: 700;
+  background-color: var(--categoryColor);
+  color: #1a1a00;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.25rem;
+}
+
+.final-price {
+  font-size: clamp(0.72rem, 2.2vw, 0.88rem);
+  font-weight: 700;
+}
+
+// ─── Botón borrar producto ────────────────────────────────────────────────────
+
+.delete-product-btn {
+  background: transparent;
+  border: 0.12rem solid var(--confirmColor);
+  border-radius: 0.4rem;
+  color: var(--confirmColor);
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.2s, color 0.2s;
+
+  svg {
+    width: clamp(0.85rem, 2.5vw, 1.05rem);
+    height: clamp(0.85rem, 2.5vw, 1.05rem);
+  }
+
+  &:hover {
+    background-color: var(--confirmColor);
+    color: var(--secondaryColor);
+  }
+}
+
+// ─── Footer del grupo ─────────────────────────────────────────────────────────
+
+.group-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0.7rem clamp(0.7rem, 3vw, 1.2rem);
+  background-color: var(--secondaryColor);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.subtotal-label {
+  font-size: clamp(0.68rem, 2vw, 0.8rem);
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+// ─── Botón WhatsApp ───────────────────────────────────────────────────────────
+
+.order-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.45rem clamp(0.7rem, 2.5vw, 1rem);
+  font-size: clamp(0.65rem, 2vw, 0.76rem);
+  font-weight: 700;
+  transition: opacity 0.2s;
+
+  svg {
+    width: clamp(0.8rem, 2.5vw, 1rem);
+    height: clamp(0.8rem, 2.5vw, 1rem);
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    opacity: 0.88;
+  }
+}
+
+// ─── Footer global ────────────────────────────────────────────────────────────
+
+.cart-global-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-all-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 0.12rem solid var(--confirmColor);
+  border-radius: 0.5rem;
+  color: var(--confirmColor);
+  padding: 0.45rem clamp(0.7rem, 2.5vw, 1rem);
+  font-size: clamp(0.65rem, 2vw, 0.76rem);
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+
+  svg {
+    width: clamp(0.8rem, 2.5vw, 0.95rem);
+    height: clamp(0.8rem, 2.5vw, 0.95rem);
+  }
+
+  &:hover {
+    background-color: var(--confirmColor);
+    color: var(--secondaryColor);
+  }
+}

@@ -44,4 +44,14 @@ export class RestaurantService {
     }
     return null;
   }
+
+  async isRestaurantOpen(restaurantId: number): Promise<boolean | null> {
+    const res = await fetch(
+      `https://localhost:7287/api/Restaurants/IsOpen/${restaurantId}`,
+      { method: 'GET' }
+    );
+    if (!res.ok) return null;
+    const resJson: boolean = await res.json();
+    return resJson;
+  }
 }
