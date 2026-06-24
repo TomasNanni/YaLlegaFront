@@ -1,4 +1,4 @@
-import { Component, input, OnInit, Signal } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Category } from '../../interfaces/category';
 import { ProductItem } from "../product-item/product-item";
 import { RouterLink } from '@angular/router';

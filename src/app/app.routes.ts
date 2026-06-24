@@ -4,7 +4,6 @@ import { RegisterPage } from './pages/register-page/register-page';
 import { RestaurantListPage } from './pages/restaurant-list-page/restaurant-list-page';
 import { RestaurantPage } from './pages/restaurant-page/restaurant-page';
 import { ProductDetails } from './components/product-details/product-details';
-import { TopBarLayout } from './layout/layout/top-bar-layout/top-bar-layout';
 import { CartPage } from './pages/cart-page/cart-page';
 import { NewEditCategory } from './pages/new-edit-category/new-edit-category';
 import { NewEditProduct } from './pages/new-edit-product/new-edit-product';

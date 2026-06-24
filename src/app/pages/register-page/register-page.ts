@@ -46,27 +46,8 @@ export class RegisterPage {
       return;
     }
     this.backRequestCurrently = true;
-    if (form.value.monday) {
-      this.openDays.push("monday");
-    }
-    if (form.value.tuesday) {
-      this.openDays.push("tuesday");
-    }
-    if (form.value.wednesday) {
-      this.openDays.push("wednesday");
-    }
-    if (form.value.thursday) {
-      this.openDays.push("thursday");
-    }
-    if (form.value.friday) {
-      this.openDays.push("friday");
-    }
-    if (form.value.saturday) {
-      this.openDays.push("saturday");
-    }
-    if (form.value.sunday) {
-      this.openDays.push("sunday");
-    }
+    const allDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    this.openDays = allDays.filter(day => form.value[day]);
     const request: UserRegistrationRequest = {
       user: {
         firstName: form.value.firstName,
@@ -94,7 +75,7 @@ export class RegisterPage {
       this.cdr.detectChanges();
     }
     else {
-      this.router.navigate(["/restaurant/:idRestaurant"]);
+      this.router.navigate(["/login"]);
     }
   }
 }

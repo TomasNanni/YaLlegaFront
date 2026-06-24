@@ -1,20 +1,18 @@
-@if (isOwner() == true && category().id == 0) {
+@if (isOwner() && category().id === 0) {
 <a [routerLink]="['/category', idRestaurant(),'New']">
     <div class="categoryBanner">
         <h2>{{category().name}}</h2>
         <h3>{{category().description}}</h3>
     </div>
 </a>
-}
-@if (isOwner() == true && category().id != 0) {
+} @else if (isOwner() && category().id !== 0) {
 <a [routerLink]="['/category/', idRestaurant(), 'Edit', category().id]">
     <div class="categoryBanner">
         <h2>{{category().name}}</h2>
         <h3>{{category().description}}</h3>
     </div>
 </a>
-}
-@else {
+} @else {
 <div class="categoryBanner">
     <h2>{{category().name}}</h2>
     <h3>{{category().description}}</h3>

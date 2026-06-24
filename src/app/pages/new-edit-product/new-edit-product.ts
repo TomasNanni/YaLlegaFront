@@ -1,10 +1,8 @@
-import { Component, inject, input, signal, Signal, viewChild } from '@angular/core';
+import { Component, inject, input, signal, viewChild } from '@angular/core';
 import { FormsModule, NgForm } from "@angular/forms";
 import { Spinner } from "../../spinner/spinner/spinner";
 import { CategoryService } from '../../services/category-service';
 import { AuthService } from '../../services/auth-service';
-import { CategoryItem } from "../../components/category-item/category-item";
-import { Category } from '../../interfaces/category';
 import { NewEditProductI, ProductDetailsI } from '../../interfaces/product';
 import { ProductService } from '../../services/product-service';
 import { showConfirmModal, showCompletionModal } from '../../modals/modals';
@@ -31,12 +29,6 @@ export class NewEditProduct {
   isOwner = false;
   router = inject(Router);
   selectedCategoryIds: number[] = [];
-  newCategory: Category = {
-    id: 1,
-    name: "Nueva categoria",
-    description: "Crear una categoria nueva",
-    products: [],
-  };
 
 
   async ngOnInit() {
@@ -87,7 +79,7 @@ export class NewEditProduct {
       description: form.value.description || '',
       urlImage: form.value.urlImage,
       basePrice: parseInt(form.value.basePrice),
-      discount: 0,
+      discount: parseInt(form.value.discount) || 0,
       isStandout: form.value.isStandout || false,
       happyHourStart: form.value.happyHourStart || '00:00:00',
       happyHourEnd: form.value.happyHourEnd || '00:00:00',

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { RestaurantService } from '../../services/restaurant-service';
 import { Restaurant } from '../../interfaces/restaurant';
 import { Spinner } from "../../spinner/spinner/spinner";
@@ -19,7 +19,6 @@ export class RestaurantPage implements OnInit {
   restaurantService = inject(RestaurantService);
   restaurant: Restaurant | undefined;
   loadingRestaurant = signal<boolean>(false);
-  cdr = inject(ChangeDetectorRef);
   auth = inject(AuthService);
   categoryService = inject(CategoryService);
   isOwner = false;
@@ -42,7 +41,7 @@ export class RestaurantPage implements OnInit {
         this.isOwner = await this.auth.validateOwner(this.idRestaurant());
         this.restaurant = res;
         await this.categoryService.getRestaurantCategories(this.idRestaurant());
-        if (this.categoryService.categories.length !== 0) {
+        if (this.categoryService.categories().length !== 0) {
           this.categoryService.getStandoutCategory();
         }
       }

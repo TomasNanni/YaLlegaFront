@@ -22,14 +22,7 @@ export interface NewEditProductI {
     categoriesId: number[],
 }
 
-export interface CartProductI {
-    id: number,
-    name: string,
-    description: string,
-    urlImage: string,
-    basePrice: number,
-    discount: number,
-    isStandout: boolean,
+export interface CartProductI extends Omit<ProductDetailsI, 'happyHourStart' | 'happyHourEnd'> {
     happyHourStart: string | null,
     happyHourEnd: string | null,
     restaurantId: number,

@@ -91,7 +91,7 @@ export class NewEditCategory implements OnInit {
       const message = await this.showConfirmModalEdit();
       if (message) {
         res = await this.categoryService.editCategory(formCategory, this.idCategory()!);
-        this.showCompletionModalEdit;
+        this.showCompletionModalEdit();
       } else {
         this.backRequestInProgress.set(false);
         return;

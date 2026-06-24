@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Category, EditCategoryI, NewCategoryI } from '../interfaces/category';
+import { Category, NewCategoryI } from '../interfaces/category';
 import { AuthService } from './auth-service';
 import { ProductDetailsI } from '../interfaces/product';
 
@@ -11,7 +11,6 @@ export class CategoryService {
   categories = signal<Category[]>([]);
   standoutCategory: Category | undefined;
   authService = inject(AuthService);
-  updatedCategory: EditCategoryI | undefined;
 
   async getCategoryById(idCategory: number) {
     const res = await fetch('https://localhost:7287/api/category/GetOneById/' + idCategory, {
@@ -41,18 +40,18 @@ export class CategoryService {
   }
 
   async editCategory(category: NewCategoryI, idCategory: number) {
-    this.updatedCategory = {
+    const updatedCategory = {
       name: category.name,
       description: category.description,
       productsId: category.productsId
-    }
+    };
     const res = await fetch("https://localhost:7287/api/category/Update/" + idCategory, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + this.authService.token,
       },
-      body: JSON.stringify(this.updatedCategory),
+      body: JSON.stringify(updatedCategory),
     });
     if (!res.ok) {
       return;
@@ -102,7 +101,7 @@ export class CategoryService {
     });
     if (!res.ok) return null;
     const resCategory: Category = await res.json();
-    this.categories().push(resCategory);
+    this.categories.update(cats => [...cats, resCategory]);
     return res;
   }
 }

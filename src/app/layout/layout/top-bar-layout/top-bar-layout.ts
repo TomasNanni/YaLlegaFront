@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { RouterModule, RouterOutlet } from "@angular/router";
+import { Component, input } from '@angular/core';
+import { RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-top-bar-layout',
@@ -8,5 +8,5 @@ import { RouterModule, RouterOutlet } from "@angular/router";
   styleUrl: './top-bar-layout.scss',
 })
 export class TopBarLayout {
-  @Input() pageTitle!: string;
+  pageTitle = input.required<string>();
 }
