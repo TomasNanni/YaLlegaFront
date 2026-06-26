@@ -26,7 +26,7 @@ export class ProductDetails implements OnInit {
   cartRequestInProgress = false;
 
   isHappyHour = computed(() => {
-    if (!this.product) return false;
+    if (!this.product || !this.product.happyHourStart || !this.product.happyHourEnd) return false;
 
     const now = new Date();
     const currentTime = now.getHours() * 60 + now.getMinutes();
