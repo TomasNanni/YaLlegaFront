@@ -51,7 +51,7 @@ export class CartPage implements OnInit {
         result.push({
           restaurantId: product.restaurantId,
           restaurantName: product.restaurantName,
-          contact: restaurant?.contact ?? '',
+          contact: restaurant!.contact,
           products: [product],
         });
       }
