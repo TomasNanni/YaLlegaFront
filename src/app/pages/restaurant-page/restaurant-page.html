@@ -28,8 +28,8 @@
 @if (categoryService.categories().length === 0) {
 <h2 class="mainPageWithHeader">El restaurante no tiene categorias</h2>
 }
-@if (categoryService.standoutCategory) {
-<app-category-item [idRestaurant]="idRestaurant()" [category]="categoryService.standoutCategory" [isOwner]="isOwner"></app-category-item>
+@if (categoryService.standoutCategory()) {
+<app-category-item [idRestaurant]="idRestaurant()" [category]="categoryService.standoutCategory()!" [isOwner]="isOwner"></app-category-item>
 }
 @if (categoryService.categories().length > 0){
 <div>

@@ -9,7 +9,7 @@ import { ProductDetailsI } from '../interfaces/product';
 export class CategoryService {
 
   categories = signal<Category[]>([]);
-  standoutCategory: Category | undefined;
+  standoutCategory = signal<Category | undefined>(undefined);
   authService = inject(AuthService);
 
   async getCategoryById(idCategory: number) {
@@ -69,14 +69,14 @@ export class CategoryService {
       });
     });
     if (standoutProducts.length > 0) {
-      this.standoutCategory = {
+      this.standoutCategory.set({
         id: 0,
         name: "Destacados",
         description: "Nuestros mejores productos",
         products: standoutProducts
-      };
+      });
     } else {
-      this.standoutCategory = undefined;
+      this.standoutCategory.set(undefined);
     }
   }
 
