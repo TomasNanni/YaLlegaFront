@@ -30,17 +30,24 @@
           </div>
         </div>
 
-        <button
-          class="addToCartBtn"
-          (click)="handleAddToCart()"
-          [disabled]="cartRequestInProgress"
-        >
-          @if (cartRequestInProgress) {
-            Agregando...
-          } @else {
-            + Agregar al carrito
-          }
-        </button>
+        <div class="addToCartRow">
+          <div class="quantityControls">
+            <button class="qtyBtn" (click)="decrementQuantity()" [disabled]="quantity() <= 1">−</button>
+            <span class="qtyValue">{{ quantity() }}</span>
+            <button class="qtyBtn" (click)="incrementQuantity()">+</button>
+          </div>
+          <button
+            class="addToCartBtn"
+            (click)="handleAddToCart()"
+            [disabled]="cartRequestInProgress"
+          >
+            @if (cartRequestInProgress) {
+              Agregando...
+            } @else {
+              + Agregar al carrito
+            }
+          </button>
+        </div>
       </div>
     </div>
   </div>

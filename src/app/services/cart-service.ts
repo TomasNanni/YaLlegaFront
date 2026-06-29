@@ -8,15 +8,16 @@ import { CartProductI } from '../interfaces/product';
 export class CartService {
   authService = inject(AuthService);
 
-  async createCart(productId: number): Promise<number | null> {
+  async createCart(productIds: number[]): Promise<number | null> {
     const res = await fetch(
-      `https://localhost:7287/api/Carts/Create/${productId}`,
+      `https://localhost:7287/api/Carts/Create`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.authService.token,
         },
+        body: JSON.stringify(productIds),
       }
     );
     if (!res.ok) return null;
@@ -34,7 +35,7 @@ export class CartService {
     return cartId;
   }
 
-  async addProduct(cartId: number, productId: number): Promise<boolean> {
+  async addProduct(cartId: number, productIds: number[]): Promise<boolean> {
     const res = await fetch(
       `https://localhost:7287/api/Carts/AddProducts/${cartId}`,
       {
@@ -43,7 +44,7 @@ export class CartService {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.authService.token,
         },
-        body: JSON.stringify([productId]),
+        body: JSON.stringify(productIds),
       }
     );
     return res.ok;

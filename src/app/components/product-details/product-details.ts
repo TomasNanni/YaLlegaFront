@@ -24,6 +24,7 @@ export class ProductDetails implements OnInit {
   product: ProductDetailsI | undefined;
   loadingProduct = signal<boolean>(false);
   cartRequestInProgress = false;
+  quantity = signal(1);
 
   isHappyHour = computed(() => {
     if (!this.product || !this.product.happyHourStart || !this.product.happyHourEnd) return false;
@@ -61,6 +62,14 @@ export class ProductDetails implements OnInit {
     this.router.navigate(['/restaurant', this.idRestaurant()]);
   }
 
+  incrementQuantity() {
+    this.quantity.update(q => q + 1);
+  }
+
+  decrementQuantity() {
+    this.quantity.update(q => Math.max(1, q - 1));
+  }
+
   async handleAddToCart() {
     if (!this.product) return;
 
@@ -68,16 +77,16 @@ export class ProductDetails implements OnInit {
 
     try {
       let success = false;
+      const qty = this.quantity();
+
+      const productIds = Array(qty).fill(this.idProduct());
 
       if (!this.auth.idCart) {
-        const cartId = await this.cartService.createCart(this.idProduct());
+        const cartId = await this.cartService.createCart(productIds);
         success = cartId !== null;
       } else {
         const cartId = parseInt(this.auth.idCart);
-        success = await this.cartService.addProduct(
-          cartId,
-          this.idProduct()
-        );
+        success = await this.cartService.addProduct(cartId, productIds);
       }
 
       if (success) {
