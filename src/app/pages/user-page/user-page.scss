@@ -1,0 +1,39 @@
+#form{
+    display: flex;
+    margin-top: 2%;
+    flex-wrap: wrap;
+    width: fit-content;
+    flex-direction: column;
+}
+.mainPageWithHeader{
+    margin-top: 4%;
+    flex-direction: column;
+    align-items: center;
+}
+.inputContainerForm{
+    align-items: center;
+}
+.error{
+    text-align: center;
+}
+div{
+    width: 100%;
+}
+.mainInput{
+    width: clamp(10rem, 20vw,15rem);
+}
+button{
+    height: 2.2rem;
+    width: 9rem;
+}
+button:hover {
+    filter: brightness(90%)
+}
+.logoutButton {
+    background-color: var(--confirmColor);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+}

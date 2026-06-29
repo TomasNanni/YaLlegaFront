@@ -1,0 +1,49 @@
+<app-top-bar-layout pageTitle="Mi Perfil"></app-top-bar-layout>
+<button class="backButton" (click)="goBack()">← Volver</button>
+<div class="mainPageWithHeader">
+    <form (ngSubmit)="handleFormSubmission(userForm)" #userForm="ngForm" class="form" id="form">
+        <div class="inputContainerForm">
+            <label for="firstName">Nombre</label>
+            <input class="mainInput" id="firstName" name="firstName" type="text" ngModel required="true"
+                #firstName="ngModel" />
+            <div class="errorContainer">
+                @if (firstName.dirty && firstName.invalid) {
+                <p class="error">El nombre es obligatorio</p>
+                }
+            </div>
+        </div>
+        <div class="inputContainerForm">
+            <label for="lastName">Apellido</label>
+            <input class="mainInput" id="lastName" name="lastName" type="text" ngModel required="true"
+                #lastName="ngModel" />
+            <div class="errorContainer">
+                @if (lastName.dirty && lastName.invalid) {
+                <p class="error">El apellido es obligatorio</p>
+                }
+            </div>
+        </div>
+        <div class="inputContainerForm">
+            <label for="emailAddress">Email</label>
+            <input class="mainInput" id="emailAddress" name="emailAddress" type="email" ngModel required="true"
+                #emailAddress="ngModel" />
+            <div class="errorContainer">
+                @if (emailAddress.dirty && emailAddress.invalid) {
+                <p class="error">El email es obligatorio</p>
+                }
+            </div>
+        </div>
+        <div class="errorContainer">
+            @if (backError) {
+            <p class="error">Error indeterminado, intente nuevamente.</p>
+            }
+        </div>
+        <div class="inputContainerForm">
+            <button class="mainInput" [disabled]="userForm.invalid || backRequestInProgress()">Guardar Cambios</button>
+            @if (backRequestInProgress() == true) {
+            <app-spinner />
+            }
+        </div>
+    </form>
+    <button class="mainInput" (click)="deleteUser()">Borrar Perfil</button>
+    <button class="mainInput logoutButton" (click)="logout()">Cerrar Sesión</button>
+</div>

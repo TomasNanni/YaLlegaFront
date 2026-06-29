@@ -7,6 +7,7 @@ import { ProductDetails } from './components/product-details/product-details';
 import { CartPage } from './pages/cart-page/cart-page';
 import { NewEditCategory } from './pages/new-edit-category/new-edit-category';
 import { NewEditProduct } from './pages/new-edit-product/new-edit-product';
+import { UserPage } from './pages/user-page/user-page';
 import { guestGuard } from './guards/guest.guard';
 import { authOwnerGuard } from './guards/auth-owner.guard';
 
@@ -57,6 +58,11 @@ export const routes: Routes = [
     {
         path: 'product/:idRestaurant/Edit/:idProduct',
         component: NewEditProduct,
+        canActivate: [guestGuard, authOwnerGuard]
+    },
+    {
+        path: 'user/:idRestaurant',
+        component: UserPage,
         canActivate: [guestGuard, authOwnerGuard]
     }
 ];

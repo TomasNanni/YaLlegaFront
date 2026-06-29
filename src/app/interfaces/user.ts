@@ -12,3 +12,8 @@ export interface NewUser {
   password: string;
   secondPassword: string;
 }
+export interface UpdatedUser {
+  firstName?: string;
+  lastName?: string;
+  emailAddress?: string;
+}
