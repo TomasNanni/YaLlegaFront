@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { ProductDetailsI } from '../../interfaces/product';
 import { RouterLink } from "@angular/router";
 
@@ -13,4 +13,7 @@ export class ProductItem {
   isOwner = input.required<boolean>();
   idRestaurant = input<number>();
 
+  finalPrice = computed(() =>
+    this.product().basePrice * (1 - this.product().discount / 100)
+  );
 }

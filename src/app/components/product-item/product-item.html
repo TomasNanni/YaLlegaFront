@@ -3,6 +3,13 @@
     <div class="container">
         <img [src]="product().urlImage" alt="Imagen Producto">
         <p>{{product().name}}</p>
+        <div class="price-row">
+            @if (product().discount > 0) {
+                <span class="original-price">${{product().basePrice}}</span>
+                <span class="discount-badge">-{{product().discount}}%</span>
+            }
+            <span class="final-price">${{finalPrice()}}</span>
+        </div>
     </div>
 </a>
 }
@@ -11,6 +18,13 @@
     <div class="container">
         <img [src]="product().urlImage" alt="Imagen Producto">
         <p>{{product().name}}</p>
+        <div class="price-row">
+            @if (product().discount > 0) {
+                <span class="original-price">${{product().basePrice}}</span>
+                <span class="discount-badge">-{{product().discount}}%</span>
+            }
+            <span class="final-price">${{finalPrice()}}</span>
+        </div>
     </div>
 </a>
 }

@@ -25,3 +25,31 @@ p {
     width: 100%;
     word-wrap: break-word;
 }
+
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    flex-wrap: wrap;
+}
+
+.original-price {
+    font-size: clamp(0.55rem, 1.6vw, 0.65rem);
+    color: var(--errorColor);
+    text-decoration: line-through;
+}
+
+.discount-badge {
+    font-size: clamp(0.5rem, 1.4vw, 0.58rem);
+    font-weight: 700;
+    background-color: var(--categoryColor);
+    color: #1a1a00;
+    padding: 0.05rem 0.2rem;
+    border-radius: 0.2rem;
+}
+
+.final-price {
+    font-size: clamp(0.65rem, 2vw, 0.8rem);
+    font-weight: 700;
+}
