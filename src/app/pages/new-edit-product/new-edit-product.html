@@ -4,6 +4,7 @@
 @else {
 <app-top-bar-layout pageTitle="Crear Producto"></app-top-bar-layout>
 }
+<button class="backButton" (click)="goBack()">← Volver</button>
 <div class="mainPageWithHeader">
     <form (ngSubmit)="handleFormSubmission(productForm)" #productForm="ngForm" class="form" id="form">
         <div>

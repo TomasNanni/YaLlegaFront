@@ -54,6 +54,10 @@ export class NewEditCategory implements OnInit {
     }
   }
 
+  goBack() {
+    this.router.navigate(['/restaurant', this.idRestaurant()]);
+  }
+
   async deleteCategory(idCategory: number) {
     if (this.idCategory() && this.isOwner == true) {
       const message = await this.showConfirmalModalDelete();

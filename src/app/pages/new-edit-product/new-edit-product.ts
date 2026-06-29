@@ -66,6 +66,10 @@ export class NewEditProduct {
     }
   }
 
+  goBack() {
+    this.router.navigate(['/restaurant', this.idRestaurant()]);
+  }
+
   checkURL(url: string): boolean {
     return /\.(jpeg|jpg|gif|png)$/i.test(url);
   }

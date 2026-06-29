@@ -220,6 +220,14 @@ p {
 	padding: 0 0.4rem;
 }
 
+.backButton {
+	background: none;
+	border: none;
+	font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+	cursor: pointer;
+	padding: 0.5rem clamp(0.6rem, 2vw, 1rem);
+}
+
 :root {
 	--topBarColor: #000FAF;
 	--secondaryColor: #EAEAEA;
