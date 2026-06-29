@@ -106,6 +106,17 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  .quantity-badge {
+    font-size: clamp(0.58rem, 1.7vw, 0.68rem);
+    font-weight: 700;
+    background-color: var(--topBarColor);
+    color: var(--secondaryColor);
+    padding: 0.08rem 0.35rem;
+    border-radius: 0.25rem;
+    margin-left: 0.3rem;
+    vertical-align: middle;
+  }
 }
 
 .product-price-row {

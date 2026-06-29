@@ -2,7 +2,7 @@ import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../services/cart-service';
 import { RestaurantService } from '../../services/restaurant-service';
-import { CartProductI } from '../../interfaces/product';
+import { CartProductI, CartProductGrouped } from '../../interfaces/product';
 import { CartRestaurantGroup } from '../../interfaces/cart';
 import { Spinner } from '../../spinner/spinner/spinner';
 import { TopBarLayout } from '../../layout/layout/top-bar-layout/top-bar-layout';
@@ -45,26 +45,31 @@ export class CartPage implements OnInit {
       const existingGroup = result.find(g => g.restaurantId === product.restaurantId);
 
       if (existingGroup) {
-        existingGroup.products.push(product);
+        const existingProduct = existingGroup.products.find(p => p.id === product.id);
+        if (existingProduct) {
+          existingProduct.quantity++;
+        } else {
+          existingGroup.products.push({ ...product, quantity: 1 });
+        }
       } else {
         const restaurant = await this.restaurantService.getRestaurantById(product.restaurantId);
         result.push({
           restaurantId: product.restaurantId,
           restaurantName: product.restaurantName,
           contact: restaurant!.contact,
-          products: [product],
+          products: [{ ...product, quantity: 1 }],
         });
       }
     }
     this.groups.set(result);
   }
 
-  finalPrice(product: CartProductI): number {
+  finalPrice(product: CartProductGrouped): number {
     return product.basePrice * (1 - product.discount / 100);
   }
 
   subtotal(group: CartRestaurantGroup): number {
-    return group.products.reduce((sum, p) => sum + this.finalPrice(p), 0);
+    return group.products.reduce((sum, p) => sum + this.finalPrice(p) * p.quantity, 0);
   }
 
   async onDeleteProduct(productId: number) {
@@ -75,7 +80,10 @@ export class CartPage implements OnInit {
     });
     if (!result.isConfirmed) return;
 
-    const ok = await this.cartService.deleteProduct(this.idCart(), [productId]);
+    const idsToDelete = this.products()
+      .filter(p => p.id === productId)
+      .map(p => p.id);
+    const ok = await this.cartService.deleteProduct(this.idCart(), idsToDelete);
     if (ok) {
       const updated = this.products().filter(p => p.id !== productId);
       this.products.set(updated);
@@ -110,9 +118,11 @@ export class CartPage implements OnInit {
       return;
     }
 
-    // Arma el mensaje de WhatsApp con la lista de productos
     const productLines = group.products
-      .map(p => `- ${p.name}: $${this.finalPrice(p)}`)
+      .map(p => {
+        const qty = p.quantity > 1 ? ` x${p.quantity}` : '';
+        return `- ${p.name}${qty}: $${this.finalPrice(p) * p.quantity}`;
+      })
       .join('\n');
 
     const message = `Hola! Quiero hacer un pedido:\n${productLines}\n\nGracias!`;
@@ -120,8 +130,7 @@ export class CartPage implements OnInit {
     const phone = group.contact.replace(/\D/g, '');
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
 
-    // Elimina los productos de este restaurante del carrito
-    const productIds = group.products.map(p => p.id);
+    const productIds = group.products.flatMap(p => Array(p.quantity).fill(p.id));
     await this.cartService.deleteProduct(this.idCart(), productIds);
 
     const remaining = this.products().filter(p => p.restaurantId !== group.restaurantId);

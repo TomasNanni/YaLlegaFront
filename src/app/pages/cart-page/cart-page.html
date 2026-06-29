@@ -25,13 +25,18 @@
                   [alt]="product.name"
                 />
                 <div class="product-info">
-                  <span class="product-name">{{ product.name }}</span>
+                  <span class="product-name">
+                    {{ product.name }}
+                    @if (product.quantity > 1) {
+                      <span class="quantity-badge">x{{ product.quantity }}</span>
+                    }
+                  </span>
                   <div class="product-price-row">
                     @if (product.discount > 0) {
                       <span class="original-price">${{ product.basePrice }}</span>
                       <span class="discount-badge">-{{ product.discount }}%</span>
                     }
-                    <span class="final-price">${{ finalPrice(product) }}</span>
+                    <span class="final-price">${{ finalPrice(product) * product.quantity }}</span>
                   </div>
                 </div>
                 <button
