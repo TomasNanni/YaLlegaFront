@@ -1,8 +1,8 @@
-import { CartProductGrouped } from './product';
+import { CartProductI } from './product';
 
 export interface CartRestaurantGroup {
     restaurantId: number;
     restaurantName: string;
     contact: string;
-    products: CartProductGrouped[];
+    products: CartProductI[];
 }

@@ -27,8 +27,5 @@ export interface CartProductI extends Omit<ProductDetailsI, 'happyHourStart' | '
     happyHourEnd: string | null,
     restaurantId: number,
     restaurantName: string,
-}
-
-export interface CartProductGrouped extends CartProductI {
-    quantity: number,
+    amount: number,
 }
