@@ -19,6 +19,16 @@
         font-weight: light;
     }
 }
+
+.standoutBanner {
+    background-color: var(--topBarColor);
+    color: #fff;
+
+    h2, h3 {
+        color: #fff;
+    }
+}
+
 #newProduct{
     display: block;
     width: fit-content;
