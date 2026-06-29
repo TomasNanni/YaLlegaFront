@@ -22,7 +22,6 @@ export class CartService {
     );
     if (!res.ok) return null;
 
-    // El backend responde 201 con body: { Message: "El id del carrito creado es {id}" }
     const resJson = await res.json();
     const message: string | undefined = resJson?.Message ?? resJson?.message;
     if (!message) return null;

@@ -31,12 +31,10 @@ export class LoginPage {
     this.solicitudABackEnCurso = false;
 
     if (loginResult) {
-      // Obtener el restaurantId del token y redirigir a la página del restaurante
       const restaurantId = this.authService.getRestaurantIdFromToken();
       if (restaurantId) {
         this.router.navigate(['/restaurant', restaurantId]);
       } else {
-        // Si no se puede obtener el restaurantId, redirigir a landing page
         this.router.navigate(['/']);
       }
       return;
