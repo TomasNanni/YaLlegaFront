@@ -19,21 +19,29 @@
 div{
     width: 100%;
 }
-#checksContainer{
-    div{
-        padding: 0.6rem 0;
-    }
-}
 .mainInput{
     width: clamp(10rem, 20vw,15rem);
 }
-button{
-    height: 2.2rem;
-    width: 9rem;
+.products-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-button.selected {
-  border: 0.3rem solid var(--secondaryColor);
+.product-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--secondaryColor);
+    }
 }
-button:hover {
-    filter: brightness(90%)
+.product-thumbnail {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.4rem;
+    object-fit: cover;
 }

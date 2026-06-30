@@ -4,7 +4,7 @@
         <!-- Formulario datos usuario -->
         <div>
             <div class="inputContainerForm">
-                <label for="firstName">Nombre</label>
+                <label for="firstName" class="required-label">Nombre</label>
                 <input class="mainInput" name="firstName" id="firstName" ngModel #firstName="ngModel" required
                     autocomplete="firstName">
             </div>
@@ -14,7 +14,7 @@
                 }
             </div>
             <div class="inputContainerForm">
-                <label for="lastName">Apellido</label>
+                <label for="lastName" class="required-label">Apellido</label>
                 <input class="mainInput" name="lastName" id="lastName" ngModel #lastName="ngModel" required
                     autocomplete="family-name">
             </div>
@@ -24,7 +24,7 @@
                 }
             </div>
             <div class="inputContainerForm">
-                <label for="emailAddress">Correo Electrónico</label>
+                <label for="emailAddress" class="required-label">Correo Electrónico</label>
                 <input class="mainInput" name="emailAddress" type="email" id="emailAddress" ngModel
                     #emailAddress="ngModel" required email autocomplete="email" placeholder="ejemplo@gmail.com">
             </div>
@@ -39,7 +39,7 @@
                 }
             </div>
             <div class="inputContainerForm">
-                <label for="password">Contraseña</label>
+                <label for="password" class="required-label">Contraseña</label>
                 <input class="mainInput" name="password" type="password" id="password" ngModel #password="ngModel"
                     required minlength="4" autocomplete="new-password" placeholder="*************">
             </div>
@@ -49,7 +49,7 @@
                 }
             </div>
             <div class="inputContainerForm">
-                <label for="secondPassword">Confirmar Contraseña</label>
+                <label for="secondPassword" class="required-label">Confirmar Contraseña</label>
                 <input class="mainInput" name="secondPassword" type="password" id="secondPassword" ngModel
                     #secondPassword="ngModel" required minlength="4" autocomplete="new-password"
                     placeholder="*************">
@@ -64,7 +64,7 @@
             </div>
             <!-- Datos restaurante -->
             <div class="inputContainerForm">
-                <label for="restaurantName">Nombre del Restaurante</label>
+                <label for="restaurantName" class="required-label">Nombre del Restaurante</label>
                 <input class="mainInput" name="restaurantName" id="restaurantName" ngModel #restaurantName="ngModel"
                     required>
             </div>
@@ -74,7 +74,7 @@
                 }
             </div>
             <div class="inputContainerForm">
-                <label for="urlLogoImage">URL Logo</label>
+                <label for="urlLogoImage" class="required-label">URL Logo</label>
                 <input class="mainInput" name="urlLogoImage" type="url" id="urlLogoImage" ngModel required
                     #urlLogoImage="ngModel">
             </div>
@@ -139,7 +139,7 @@
                 </div>
             </div>
             <div class="inputContainerForm">
-                <label for="openingTime">Horario de Apertura</label>
+                <label for="openingTime" class="required-label">Horario de Apertura</label>
                 <input class="mainInput" name="openingTime" type="time" id="openingTime" ngModel #openingTime="ngModel"
                     required>
             </div>
@@ -149,7 +149,7 @@
                 }
             </div>
             <div class="inputContainerForm">
-                <label for="closingTime">Horario de Cierre</label>
+                <label for="closingTime" class="required-label">Horario de Cierre</label>
                 <input class="mainInput" name="closingTime" type="time" id="closingTime" ngModel #closingTime="ngModel"
                     required>
             </div>
@@ -159,7 +159,7 @@
                 }
             </div>
             <div class="inputContainerForm">
-                <label for="contact">Contacto</label>
+                <label for="contact" class="required-label">Contacto</label>
                 <input class="mainInput" name="contact" type="tel" id="contact" ngModel #contact="ngModel" required
                     placeholder="+54 341 123 4567">
             </div>
@@ -169,7 +169,7 @@
                 }
             </div>
             <div class="inputContainerForm">
-                <button class="mainInput"
+                <button class="btn-primary"
                     [disabled]="registerForm.invalid || backRequestCurrently">Registrarse</button>
             </div>
             <div class="errorContainer">

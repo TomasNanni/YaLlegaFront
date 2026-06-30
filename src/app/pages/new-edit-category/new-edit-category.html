@@ -8,7 +8,7 @@
 <div class="mainPageWithHeader">
     <form (ngSubmit)="handleFormSubmission(categoryForm)" #categoryForm="ngForm" class="form" id="form">
         <div class="inputContainerForm">
-            <label for="name">Nombre</label>
+            <label for="name" class="required-label">Nombre</label>
             <input class="mainInput" id="name" name="name" type="text" ngModel required="true" minlength="1"
                 maxlength="30" #name="ngModel" />
             <div class="errorContainer">
@@ -20,17 +20,20 @@
         <div class="inputContainerForm">
             <label for="description">Descripción</label>
             <input class="mainInput" id="description" name="description" type="text" ngModel maxlength="200"
-                #name="ngModel" />
+                #description="ngModel" />
         </div>
         <input type="hidden" name="productsId" ngModel #productsId="ngModel" />
         <div class="inputContainerForm">
             <label>Productos del Restaurante</label>
             <div class="products-list">
                 @for (product of restaurantProducts; track product.id) {
-                <button type="button" (click)="toggleProductSelection(product.id)"
-                    [class.selected]="selectedProductIds.includes(product.id)">
-                    <app-product-item [isOwner]="isOwner" [product]="product" />
-                </button>
+                <div class="product-checkbox">
+                    <input type="checkbox" [id]="'product-' + product.id"
+                        [checked]="selectedProductIds.includes(product.id)"
+                        (change)="toggleProductSelection(product.id)" />
+                    <img [src]="product.urlImage" [alt]="product.name" class="product-thumbnail" />
+                    <label [for]="'product-' + product.id">{{ product.name }}</label>
+                </div>
                 }
                 @empty {
                 <p>No hay productos disponibles</p>
@@ -45,10 +48,10 @@
 
         <div class="inputContainerForm">
             @if(idCategory()){
-            <button class="mainInput" [disabled]="categoryForm.invalid || backRequestInProgress()">Editar
+            <button class="btn-primary" [disabled]="categoryForm.invalid || backRequestInProgress()">Editar
                 Categoría</button>
             } @else {
-            <button class="mainInput" [disabled]="categoryForm.invalid || backRequestInProgress()">Agregar
+            <button class="btn-primary" [disabled]="categoryForm.invalid || backRequestInProgress()">Agregar
                 Categoría</button>
             }
             @if (backRequestInProgress() == true) {
@@ -57,6 +60,6 @@
         </div>
     </form>
     @if (idCategory()) {
-    <button class="mainInput" (click)="deleteCategory(idCategory()!)">Borrar Categoria</button>
+    <button class="btn-danger-outline" (click)="deleteCategory(idCategory()!)">Borrar Categoria</button>
     }
 </div>

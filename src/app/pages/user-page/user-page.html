@@ -1,9 +1,10 @@
 <app-top-bar-layout pageTitle="Mi Perfil"></app-top-bar-layout>
 <button class="backButton" (click)="goBack()">← Volver</button>
 <div class="mainPageWithHeader">
+    <h2 class="formTitle">Editar Datos Personales</h2>
     <form (ngSubmit)="handleFormSubmission(userForm)" #userForm="ngForm" class="form" id="form">
         <div class="inputContainerForm">
-            <label for="firstName">Nombre</label>
+            <label for="firstName" class="required-label">Nombre</label>
             <input class="mainInput" id="firstName" name="firstName" type="text" ngModel required="true"
                 #firstName="ngModel" />
             <div class="errorContainer">
@@ -13,7 +14,7 @@
             </div>
         </div>
         <div class="inputContainerForm">
-            <label for="lastName">Apellido</label>
+            <label for="lastName" class="required-label">Apellido</label>
             <input class="mainInput" id="lastName" name="lastName" type="text" ngModel required="true"
                 #lastName="ngModel" />
             <div class="errorContainer">
@@ -23,7 +24,7 @@
             </div>
         </div>
         <div class="inputContainerForm">
-            <label for="emailAddress">Email</label>
+            <label for="emailAddress" class="required-label">Email</label>
             <input class="mainInput" id="emailAddress" name="emailAddress" type="email" ngModel required="true"
                 #emailAddress="ngModel" />
             <div class="errorContainer">
@@ -38,12 +39,12 @@
             }
         </div>
         <div class="inputContainerForm">
-            <button class="mainInput" [disabled]="userForm.invalid || backRequestInProgress()">Guardar Cambios</button>
+            <button class="btn-primary" [disabled]="userForm.invalid || backRequestInProgress()">Guardar Cambios</button>
             @if (backRequestInProgress() == true) {
             <app-spinner />
             }
         </div>
     </form>
-    <button class="mainInput" (click)="deleteUser()">Borrar Perfil</button>
-    <button class="mainInput logoutButton" (click)="logout()">Cerrar Sesión</button>
+    <button class="btn-danger-outline" (click)="deleteUser()">Borrar Perfil</button>
+    <button class="btn-primary logoutButton" (click)="logout()">Cerrar Sesión</button>
 </div>

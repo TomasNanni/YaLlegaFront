@@ -9,7 +9,7 @@
     <form (ngSubmit)="handleFormSubmission(productForm)" #productForm="ngForm" class="form" id="form">
         <div>
             <div class="inputContainerForm">
-                <label for="name">Nombre</label>
+                <label for="name" class="required-label">Nombre</label>
                 <input class="mainInput" id="name" name="name" type="text" ngModel required="true" #name="ngModel" />
                 <div class="errorContainer">
                     @if (name.dirty && name.invalid) {
@@ -20,11 +20,11 @@
             <div class="inputContainerForm">
                 <label for="description">Descripción</label>
                 <input class="mainInput" id="description" name="description" type="text" ngModel maxlength="200"
-                    #name="ngModel" />
+                    #description="ngModel" />
                 <div class="errorContainer"></div>
             </div>
             <div class="inputContainerForm">
-                <label for="urlImage">URL de la imagen del producto</label>
+                <label for="urlImage" class="required-label">URL de la imagen del producto</label>
                 <input class="mainInput" id="urlImage" name="urlImage" type="text" ngModel #urlImage="ngModel"
                     required="true" />
                 <div class="errorContainer">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="inputContainerForm">
-                <label for="mainInput">Precio Base</label>
+                <label for="basePrice" class="required-label">Precio Base</label>
                 <input class="mainInput" id="basePrice" name="basePrice" type="text" ngModel required="true"
                     #basePrice="ngModel" />
                 <div class="errorContainer">
@@ -74,7 +74,7 @@
                     #happyHourEnd="ngModel">
             </div>
             <div class="inputContainerForm">
-                <label>Categorías del Restaurante</label>
+                <label class="required-label">Categorías del Restaurante</label>
                 <div class="categoriesList">
                     @for (category of categoryService.categories(); track category.id) {
                     <div class="categoryCheckbox">
@@ -102,9 +102,9 @@
             }
             <div class="inputContainerForm">
                 @if(idProduct()){
-                <button [disabled]="productForm.invalid || backRequestInProgress()">Editar Producto</button>
+                <button class="btn-primary" [disabled]="productForm.invalid || backRequestInProgress()">Editar Producto</button>
                 } @else {
-                <button [disabled]="productForm.invalid || backRequestInProgress()">Crear Producto</button>
+                <button class="btn-primary" [disabled]="productForm.invalid || backRequestInProgress()">Crear Producto</button>
                 }
                 @if (backRequestInProgress() == true) {
                 <app-spinner />

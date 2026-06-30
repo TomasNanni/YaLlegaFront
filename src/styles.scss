@@ -239,4 +239,48 @@ p {
 	--textFont: "Geologica", sans-serif;
 	--categoryColor: #EEEE2F;
 	--confirmColor: #581712;
+	--requiredColor: #c0392b;
+	--whiteColor: #ffffff;
+	--disabledBgColor: #aaaaaa;
+	--disabledTextColor: #eeeeee;
+}
+
+.required-label::after {
+	content: " *";
+	color: var(--requiredColor);
+	font-weight: 700;
+}
+
+.btn-primary {
+	background-color: var(--topBarColor);
+	color: var(--whiteColor);
+	border: none;
+	border-radius: 0.4rem;
+	padding: 0.5rem 1.2rem;
+	font-size: 0.85rem;
+	cursor: pointer;
+	transition: filter 0.2s;
+	&:hover:not(:disabled) {
+		filter: brightness(120%);
+	}
+	&:disabled {
+		background-color: var(--disabledBgColor);
+		color: var(--disabledTextColor);
+		cursor: not-allowed;
+	}
+}
+
+.btn-danger-outline {
+	background-color: transparent;
+	color: var(--confirmColor);
+	border: 0.15rem solid var(--confirmColor);
+	border-radius: 0.4rem;
+	padding: 0.5rem 1.2rem;
+	font-size: 0.85rem;
+	cursor: pointer;
+	transition: background-color 0.2s, color 0.2s;
+	&:hover {
+		background-color: var(--confirmColor);
+		color: var(--whiteColor);
+	}
 }

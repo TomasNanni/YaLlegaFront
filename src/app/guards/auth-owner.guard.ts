@@ -17,13 +17,13 @@ export const authOwnerGuard: CanActivateFn = async (route, state) => {
     const isOwner = await authService.validateOwner(parseInt(idRestaurant));
 
     if (!isOwner) {
-      if (restaurantId) {
+      if (restaurantId && restaurantId !== parseInt(idRestaurant)) {
         const redirectPath = router.parseUrl(`/restaurant/${restaurantId}`);
         return new RedirectCommand(redirectPath, {
           skipLocationChange: true,
         });
       } else {
-        router.navigate(['/']);
+        authService.logout();
       }
       return false;
     }

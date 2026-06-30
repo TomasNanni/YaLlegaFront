@@ -1,25 +1,22 @@
 import { Component, inject, input, OnInit, signal, viewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { Category, NewCategoryI } from '../../interfaces/category';
 import { ProductDetailsI } from '../../interfaces/product';
 import { CategoryService } from '../../services/category-service';
-import { ProductService } from '../../services/product-service';
 import { Spinner } from "../../spinner/spinner/spinner";
-import { ProductItem } from "../../components/product-item/product-item";
 import { AuthService } from '../../services/auth-service';
 import { showConfirmModal, showCompletionModal } from '../../modals/modals';
 import { TopBarLayout } from "../../layout/layout/top-bar-layout/top-bar-layout";
 
 @Component({
   selector: 'app-new-edit-category',
-  imports: [Spinner, ProductItem, FormsModule, TopBarLayout],
+  imports: [Spinner, FormsModule, TopBarLayout],
   templateUrl: './new-edit-category.html',
   styleUrl: './new-edit-category.scss',
 })
 export class NewEditCategory implements OnInit {
   categoryService = inject(CategoryService);
-  productService = inject(ProductService);
   router = inject(Router);
   backError = false;
   backRequestInProgress = signal<boolean>(false);
@@ -36,22 +33,34 @@ export class NewEditCategory implements OnInit {
     this.isOwner = await this.auth.validateOwner(this.idRestaurant());
     if (this.isOwner == false) {
       this.router.navigate(["/"]);
+      return;
     }
-    else {
-      if (this.idCategory() != 0) {
-        const res: Category | null = await this.categoryService.getCategoryById(this.idCategory()!);
-        if (res) {
-          this.category = res;
-          this.restaurantProducts = this.category.products;
-          this.selectedProductIds = this.category.products.map(p => p.id);
-          this.form()?.setValue({
-            name: this.category.name,
-            description: this.category.description,
-            productsId: this.selectedProductIds,
-          });
-        }
+
+    await this.categoryService.getRestaurantCategories(this.idRestaurant());
+    this.extractAllProducts();
+
+    if (this.idCategory() != 0) {
+      const res: Category | null = await this.categoryService.getCategoryById(this.idCategory()!);
+      if (res) {
+        this.category = res;
+        this.selectedProductIds = this.category.products.map(p => p.id);
+        this.form()?.setValue({
+          name: this.category.name,
+          description: this.category.description,
+          productsId: this.selectedProductIds,
+        });
       }
     }
+  }
+
+  private extractAllProducts() {
+    const productsMap = new Map<number, ProductDetailsI>();
+    for (const category of this.categoryService.categories()) {
+      for (const product of category.products) {
+        productsMap.set(product.id, product);
+      }
+    }
+    this.restaurantProducts = Array.from(productsMap.values());
   }
 
   goBack() {
