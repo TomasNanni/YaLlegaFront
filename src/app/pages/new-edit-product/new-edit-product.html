@@ -112,4 +112,7 @@
             </div>
         </div>
     </form>
+    @if (idProduct()) {
+    <button class="btn-danger-outline" (click)="deleteProduct(idProduct()!)">Borrar Producto</button>
+    }
 </div>

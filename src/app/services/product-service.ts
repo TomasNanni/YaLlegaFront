@@ -36,6 +36,17 @@ export class ProductService {
     return res;
   }
 
+  async deleteProduct(idProduct: number): Promise<true | string> {
+    const res = await fetch('https://localhost:7287/api/products/Delete/' + idProduct, {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + this.authService.token,
+      },
+    });
+    if (!res.ok) return await res.text();
+    return true;
+  }
+
   async getProductById(idProduct: number) {
     const res = await fetch('https://localhost:7287/api/products/GetOneById/' + idProduct, {
       method: 'GET',

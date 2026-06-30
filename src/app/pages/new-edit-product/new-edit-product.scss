@@ -6,6 +6,8 @@
 }
 .mainPageWithHeader{
     margin-top: 4%;
+    flex-direction: column;
+    align-items: center;
 }
 .inputContainerForm{
     align-items: center;
@@ -27,6 +29,10 @@ div{
 button{
     height: 2.2rem;
     width: 9rem;
+}
+.btn-danger-outline{
+    width: fit-content;
+    height: fit-content;
 }
 button.selected {
   border: 0.3rem solid var(--secondaryColor);

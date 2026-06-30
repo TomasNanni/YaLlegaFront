@@ -158,4 +158,40 @@ export class NewEditProduct {
       title: "Producto creado correctamente",
     });
   }
+
+  async deleteProduct(idProduct: number) {
+    if (this.idProduct() && this.isOwner == true) {
+      const message = await this.showConfirmModalDelete();
+      if (message) {
+        const res = await this.productService.deleteProduct(this.idProduct()!);
+        if (res === true) {
+          this.showCompletionModalDelete();
+          this.router.navigate(['/restaurant', this.idRestaurant()]);
+        } else {
+          showCompletionModal.fire({
+            title: "No se pudo borrar el producto",
+            text: res,
+            icon: 'error',
+          });
+        }
+      }
+    }
+  }
+
+  showConfirmModalDelete() {
+    return showConfirmModal.fire({
+      confirmButtonText: "Confirmar",
+      title: "Confirma borrar el producto?",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        return true;
+      };
+      return false;
+    });
+  }
+  showCompletionModalDelete() {
+    showCompletionModal.fire({
+      title: "Producto borrado correctamente",
+    });
+  }
 }
