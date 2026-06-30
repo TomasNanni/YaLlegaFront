@@ -1,7 +1,7 @@
 import { Component, inject, input, OnInit, signal, viewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Category, NewCategoryI } from '../../interfaces/category';
+import { Category, NewEditCategoryI } from '../../interfaces/category';
 import { ProductDetailsI } from '../../interfaces/product';
 import { CategoryService } from '../../services/category-service';
 import { Spinner } from "../../spinner/spinner/spinner";
@@ -30,16 +30,16 @@ export class NewEditCategory implements OnInit {
   isOwner = false;
 
   async ngOnInit() {
-    this.isOwner = await this.auth.validateOwner(this.idRestaurant());
-    if (this.isOwner == false) {
-      this.router.navigate(["/"]);
-      return;
-    }
+    // this.isOwner = await this.auth.validateOwner(this.idRestaurant());
+    // if (this.isOwner == false) {
+    //   this.router.navigate(["/"]);
+    //   return;
+    // }
 
     await this.categoryService.getRestaurantCategories(this.idRestaurant());
     this.extractAllProducts();
 
-    if (this.idCategory() != 0) {
+    if (this.idCategory() != 0 || this.idCategory() != null) {
       const res: Category | null = await this.categoryService.getCategoryById(this.idCategory()!);
       if (res) {
         this.category = res;
@@ -91,10 +91,9 @@ export class NewEditCategory implements OnInit {
     this.backRequestInProgress.set(true);
     this.backError = false;
 
-    const formCategory: NewCategoryI = {
+    const formCategory: NewEditCategoryI = {
       name: form.value.name,
       description: form.value.description || '',
-      RestaurantUserId: this.idRestaurant(),
       productsId: this.selectedProductIds,
     };
 

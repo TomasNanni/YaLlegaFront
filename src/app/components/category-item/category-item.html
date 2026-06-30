@@ -1,12 +1,12 @@
 @if (isOwner() && category().id === 0) {
-<a [routerLink]="['/category', idRestaurant(),'New']">
+<a [routerLink]="['/category','New']">
     <div class="categoryBanner" [ngClass]="{'standoutBanner': isStandout()}">
         <h2>{{category().name}}</h2>
         <h3>{{category().description}}</h3>
     </div>
 </a>
 } @else if (isOwner() && category().id !== 0) {
-<a [routerLink]="['/category/', idRestaurant(), 'Edit', category().id]">
+<a [routerLink]="['/category/', 'Edit', category().id]">
     <div class="categoryBanner" [ngClass]="{'standoutBanner': isStandout()}">
         <h2>{{category().name}}</h2>
         <h3>{{category().description}}</h3>

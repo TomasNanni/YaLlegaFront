@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Category, NewCategoryI } from '../interfaces/category';
+import { Category, NewEditCategoryI } from '../interfaces/category';
 import { AuthService } from './auth-service';
 import { ProductDetailsI } from '../interfaces/product';
 
@@ -39,7 +39,7 @@ export class CategoryService {
     return true;
   }
 
-  async editCategory(category: NewCategoryI, idCategory: number) {
+  async editCategory(category: NewEditCategoryI, idCategory: number) {
     const updatedCategory = {
       name: category.name,
       description: category.description,
@@ -90,7 +90,7 @@ export class CategoryService {
     }
   }
 
-  async createCategory(newCategory: NewCategoryI) {
+  async createCategory(newCategory: NewEditCategoryI  ) {
     const res = await fetch("https://localhost:7287/api/category/Create", {
       method: 'POST',
       headers: {

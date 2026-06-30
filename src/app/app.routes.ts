@@ -41,12 +41,12 @@ export const routes: Routes = [
         component: CartPage
     },
     {
-        path: 'category/:idRestaurant/Edit/:idCategory',
+        path: 'category/Edit/:idCategory',
         component: NewEditCategory,
         canActivate: [guestGuard, authOwnerGuard]
     },
     {
-        path: 'category/:idRestaurant/New',
+        path: 'category/New',
         component: NewEditCategory,
         canActivate: [guestGuard, authOwnerGuard]
     },
