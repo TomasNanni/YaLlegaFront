@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth-service';
 import { CategoryService } from '../../services/category-service';
 import { CategoryItem } from "../../components/category-item/category-item";
 import { Category } from '../../interfaces/category';
+import { showCompletionModal } from '../../modals/modals';
 
 @Component({
   selector: 'app-restaurant-page',
@@ -41,6 +42,16 @@ export class RestaurantPage implements OnInit {
       if (res) {
         this.isOwner = await this.auth.validateOwner(this.idRestaurant());
         this.restaurant = res;
+        if (!this.isOwner) {
+          const isOpen = await this.restaurantService.isRestaurantOpen(this.idRestaurant());
+          if (!isOpen) {
+            await showCompletionModal.fire({
+              title: 'Restaurante cerrado',
+              text: `${this.restaurant.name} no está abierto en este momento, pero podés seguir navegando.`,
+              icon: 'error',
+            });
+          }
+        }
         await this.categoryService.getRestaurantCategories(this.idRestaurant());
         if (this.categoryService.categories().length !== 0) {
           this.categoryService.getStandoutCategory();
